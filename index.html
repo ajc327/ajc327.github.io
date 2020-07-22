@@ -108,7 +108,7 @@
       <h1 class="site-title">Andy C's Blog</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">Some learning condensations</p>
+      <p class="site-subtitle" itemprop="description">Condensation of some learnings</p>
   </div>
 
   <div class="site-nav-right">
@@ -345,7 +345,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-22 20:55:35" itemprop="dateModified" datetime="2020-07-22T20:55:35+08:00">2020-07-22</time>
+                <time title="Modified: 2020-07-22 22:23:13" itemprop="dateModified" datetime="2020-07-22T22:23:13+08:00">2020-07-22</time>
               </span>
 
           
@@ -375,13 +375,27 @@
 
 
 <p>We now use the following to create the database and add a user for the database: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &#39;mydb&#39;;</span><br><span class="line">CREATE USER &#39;myuser&#39; IDENTIFIED BY &#39;mypassword&#39;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE \&#96;mydb\&#96;;</span><br><span class="line">CREATE USER &#39;myuser&#39; IDENTIFIED BY &#39;mypassword&#39;;</span><br></pre></td></tr></table></figure>
 
 <p>We need to allow acess from localhost, which is the most secure and common configuration for a web application. To do this: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT USAGE ON &#39;.&#39; TO &#39;myuser&#39;@localhost IDENTIFIED BY &#39;mypassword&#39; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT USAGE ON *.* TO &#39;myuser&#39;@localhost IDENTIFIED BY &#39;mypassword&#39; </span><br><span class="line">GRANT ALL privileges ON \&#96;mydb\&#96;.* TO &#39;myuser&#39;@localhost;</span><br></pre></td></tr></table></figure>
 
+<p>We now apply the changes and view the results of the permission settings by using:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">SHOW GRANTS FOR &#39;myuser&#39;@localhost;</span><br></pre></td></tr></table></figure>
 
+<p>As we proceeded through these steps, we encountered syntax problems many times, this is due to the special character we need to use when we call databases. </p>
+<p>We can delete users and databases using: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP USER myuser@localhost;</span><br><span class="line">DROP DATABASE mydb; </span><br></pre></td></tr></table></figure>
 
+<p>We now install <code>php-mysql</code> using <code>sudo apt-get install php-mysql</code>, and finally we can use <code>sudo apt-get install phpmyadmin</code> to install phpmyadmin. When prompted, we choose <code>apache2</code> to use apache2 as the web server we want. </p>
+<p>Note: We must install phpmyadmin last!</p>
+<p>After installation, we follow through the set up process in the terminal window. We will be asked to create some passwords for mysql, note that this is a different set of password for th mysql only. </p>
+<p>Now, we have a <code>/var/www/html</code> folder set up. We need to give ourselves permissions for this folder as well as the <code>/etc/php/7.3</code> folder. In the <code>7.3</code> folder, we can change some properties of our server such as max file size and cache storage times. </p>
+<p>Next, we append <code>Include /etc/phpmyadmin/apache.conf</code> into the <code>/etc/apache2/apache2.conf</code> file to link phpmyadmin with the apache2. Restart the apache2 server using: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service apache2 restart</span><br></pre></td></tr></table></figure>
+
+<p>Now, we can open up a web browser and navigate to <code>localhost/phpMyAdmin</code> and log in with our credentials. </p>
+<img src="/2020/07/21/Setting-up-a-LAMP-stack-on-the-Raspi/myadmin.png" class="">
 
       
     </div>
