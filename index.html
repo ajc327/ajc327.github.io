@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -221,6 +221,202 @@
 
         <div class="content index posts-expand">
           
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://ajc327.site/2020/08/19/SQL-basics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy Cai">
+      <meta itemprop="description" content="This started as a project for learning  computer science and operating systems. I will document some of the things I did, the problems I encountered and the solutions.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy C's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/19/SQL-basics/" class="post-title-link" itemprop="url">SQL basics</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-19 01:35:50" itemprop="dateCreated datePublished" datetime="2020-08-19T01:35:50+08:00">2020-08-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><hr>
+<h2 id="Data-Types"><a href="#Data-Types" class="headerlink" title="Data Types"></a>Data Types</h2><hr>
+<h2 id="Commands"><a href="#Commands" class="headerlink" title="Commands"></a>Commands</h2><p>Once we are in the Mariadb console, we can use SQL commands to achieve database management tasks. </p>
+<p>In SQL, the convention is to write the commands in all uppercase. This is to distinguish the commands from the others.</p>
+<p>First, we want to create a database, create a user and give the user previleges to use the database. </p>
+<p>Now, we can use the database by calling:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USE mydb</span><br></pre></td></tr></table></figure>
+
+<p>A database is used to store a number of tables, which are basically like a sheet in Excel. To create a table, we use: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE students (</span><br><span class="line">	student_id INT PRIMARY KEY,</span><br><span class="line">	name VARCHAR(20),</span><br><span class="line">	major VARCHAR(20)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>Note that we have defined the student_id column as integers, and we have indicated that it is the <code>primary key</code>. Also, we need to define how many string characters we would like to assign to each entry in the column. For names, 20 should be sufficient.</p>
+<p>We can now see the table when use use:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DESCRIBE students;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/08/19/SQL-basics/des.png" class=""> 
+
+<p>To delete a table, use: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE mytable; </span><br></pre></td></tr></table></figure>
+
+<p>To add a gpa column to the students table, use:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE students ADD gpa DECIMAL(3,2); </span><br></pre></td></tr></table></figure>
+
+<p>To remove the gpa column from the table, use: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE students DROP COLUMN gpa;</span><br></pre></td></tr></table></figure>
+
+<p>Now, we have the framework of the table set up, however there is no data inside of the table, so we will need to populate it. </p>
+<p>To enter a row into the table, use the following: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO students VALUES(1,&#39;Andy&#39;, &#39;Engineering&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>To see the table after this, we can use:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student;</span><br></pre></td></tr></table></figure>
+
+<p>This will show the following: </p>
+<img src="/2020/08/19/SQL-basics/select.png" class=""> 
+
+<p>If we are missing some values but would like to enter data for the other columns, we can use the following command: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO students(student_id, name, major) VALUES(3,&#39;Mike&#39;,&#39;Engineering&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>The missing values will be replaced with a ‘Null’ by the database.</p>
+<img src="/2020/08/19/SQL-basics/nogpa.png" class=""> 
+
+<p>We can also specify some attributes or constraints for the columns. For example, we can use the keywords <code>UNIQUE</code>, and <code>NOT NULL</code> to ensure the name column must not be null and that each row in the table must have a unique major. Using the keyword <code>DEFAULT</code>, we defaulted the gpa to 0 if not provided with one. the <code>AUTO_INCREMENT</code> keyword automatically increments the integer value of student_id. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE students (</span><br><span class="line">	student_id INT AUTO_INCREMENT,</span><br><span class="line">	name VARCHAR(20) NOT NULL,</span><br><span class="line">	major VARCHAR(20) UNIQUE,</span><br><span class="line">	gpa DECIMAL(3,2) DEFAULT &#39;0.00&#39;</span><br><span class="line">	PRIMARY KEY(student_id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>To change data in the table, we have a few more commands. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UPDATE students </span><br><span class="line">SET major &#x3D; &#39;Engi&#39;</span><br><span class="line">WHERE major &#x3D; &#39;Engineering&#39; OR major &#x3D; &#39;engineering&#39;;</span><br></pre></td></tr></table></figure>
+<p>The above code changes the major colume to ‘Engi’ if it is currently ‘engineering’. Note it is possible to use boolean logic in this operation. </p>
+<p>To delete a datapoint from the table, use: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM students</span><br><span class="line">WHERE name &#x3D; &#39;Tom&#39; AND gpa &#x3D; 0.00; </span><br></pre></td></tr></table></figure>
+
+<h1 id="Queries"><a href="#Queries" class="headerlink" title="Queries"></a>Queries</h1><p>Queries are pieces of commands to grab specific data we would like to access according to certain conditions. </p>
+<p>We have already used the command <code>SELECT * FROM students;</code>, which just selects everything from the table. We can be more specific by using the following syntax:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT students.student_id AS ID, sduents.gpa AS MARK</span><br><span class="line">FROM students</span><br><span class="line">WHERE major IN (&#39;Engineering&#39;,&#39;Maths&#39;) OR name &#x3D; &#39;Andy&#39;</span><br><span class="line">-- note we can also use &lt;, &gt;, &lt;&#x3D;, &gt;&#x3D;, &lt;&gt;, IN as operators. </span><br><span class="line">ORDER BY gpa ASC, student_id</span><br><span class="line">LIMIT 5;</span><br></pre></td></tr></table></figure>
+
+<p>In the above code we isolate the two columns we want, and filter using major and andy, then we order the results firstly using gpa in ascending order and then using student_id. We show the first 5 data points using the <code>LIMIT</code> keyword. The use of <code>AS</code> renames the columns when we show them. As the schema get more and more complex, the ways of querying them and obtain the data we want becomes more complicated.</p>
+<p>To find out all the different values in a column, use:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT major </span><br><span class="line">FROM students;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="SQL-functions"><a href="#SQL-functions" class="headerlink" title="SQL functions"></a>SQL functions</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--SELECT COUNT(emp_id)  --this counts the number of data points satisfying the condition</span><br><span class="line">--SELECT AVG(salary) -- average of salaries</span><br><span class="line">--SELECT SUM(slarary) -- sum of salaries</span><br><span class="line">FROM employee </span><br><span class="line">WHERE sex &#x3D; &#39;F&#39; AND birth_data &gt; &#39;1970-01-01&#39;</span><br></pre></td></tr></table></figure>
+
+<p>To count things then group by category:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT COUNT(sex), sex </span><br><span class="line">From employee</span><br><span class="line">GROUP BY sex;</span><br></pre></td></tr></table></figure>
+<p>This is called aggregation in SQL. </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://ajc327.site/2020/08/19/Deploying-the-Hexo-website-to-Github/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy Cai">
+      <meta itemprop="description" content="This started as a project for learning  computer science and operating systems. I will document some of the things I did, the problems I encountered and the solutions.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy C's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/19/Deploying-the-Hexo-website-to-Github/" class="post-title-link" itemprop="url">Deploying the Hexo website to Github</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-19 01:34:55" itemprop="dateCreated datePublished" datetime="2020-08-19T01:34:55+08:00">2020-08-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Creating-the-user-repo-on-Github"><a href="#Creating-the-user-repo-on-Github" class="headerlink" title="Creating the user repo on Github"></a>Creating the user repo on Github</h2><p>Assuming we already have a Github account, we need to first log in to our personal page, then create a personal repository. Note that the name of this repository needs to strictly follow the format <code>githubID.github.io</code>, or else our hexo server will fail to deploy to Github. </p>
+<h2 id="Generating-SSH-key-and-providing-it-to-Github"><a href="#Generating-SSH-key-and-providing-it-to-Github" class="headerlink" title="Generating SSH key and providing it to Github"></a>Generating SSH key and providing it to Github</h2><p>Now we need to return to the git bash on the web server, and configure git so that it has our credentials: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">git config --global user.name &quot;myusername&quot;</span><br><span class="line">git config --global user.email &quot;youremail&quot; </span><br></pre></td></tr></table></figure>
+
+<p>Next, we need to generate a private public key pair so that github can use the public key to communicate with our machine using ssh. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">ssh-keygen -t rsa -C &quot;youremail&quot;</span><br></pre></td></tr></table></figure>
+
+<p>The code above will create a .ssh folder if it does not exist, in the root folder. In this folder there will be a <code>id_rsa.pub</code> file, which is the public key. We will upload this to Github. </p>
+<h2 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h2><p>Now, we can actually connect the hexo server and the Github repo. This step will upload the files generated by hexo into the GitHub repo, so we can access the website publicly through the GitHub server. To do this, we first add the relevant deployment information in the <code>_config.yml</code> page. We can edit it using <code>sudo geany _config.yml</code>. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">deploy: </span><br><span class="line">	type:git </span><br><span class="line">	repo: https:&#x2F;&#x2F;github.com&#x2F;id&#x2F;id.github.io.git</span><br><span class="line">	branch: master </span><br></pre></td></tr></table></figure>
+
+<p>Now we need to install the deployment software as well, using <code>npm install hexo-deployer-git --save</code>.</p>
+<p>Finally, we can use the following to clean the folder, generate the static articles, then deploy the website. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">hexo clean </span><br><span class="line">hexo generate </span><br><span class="line">hexo deploy </span><br></pre></td></tr></table></figure>
+
+<p>If we now visit <code>http://id.github.io</code> we will be able to see the website. However, this is a rather random address to remember, so we can give the website a personalised address. We can do this by buying a domain name such as <code>andycai.top</code> from vendors such as godaddy or alicloud. A more common suffix like .com may be more expensive. After buying the domain name, we can set up an CNAME (canonical Name record) for the domain, essentially making it an alias of our default <code>id.github.io</code> domain. </p>
+<p>Now, we can access our website from the new domain name <code>andycai.top</code>.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
