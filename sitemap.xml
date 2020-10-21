@@ -2,56 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://ajc327.site/2020/08/22/Hacking-Growth-Notes/</loc>
+    <loc>http://andycai.top/2020/08/22/Hacking-Growth-Notes/</loc>
     
     <lastmod>2020-08-26</lastmod>
     
   </url>
   
   <url>
-    <loc>http://ajc327.site/about/index.html</loc>
+    <loc>http://andycai.top/about/index.html</loc>
     
     <lastmod>2020-08-21</lastmod>
     
   </url>
   
   <url>
-    <loc>http://ajc327.site/2020/08/19/SQL-basics/</loc>
+    <loc>http://andycai.top/2020/08/19/SQL-basics/</loc>
     
     <lastmod>2020-08-18</lastmod>
     
   </url>
   
   <url>
-    <loc>http://ajc327.site/2020/08/19/Deploying-the-Hexo-website-to-Github/</loc>
+    <loc>http://andycai.top/2020/08/19/Deploying-the-Hexo-website-to-Github/</loc>
     
     <lastmod>2020-08-18</lastmod>
     
   </url>
   
   <url>
-    <loc>http://ajc327.site/2020/07/21/Setting-up-a-LAMP-stack-on-the-Raspi/</loc>
+    <loc>http://andycai.top/2020/07/21/Setting-up-a-LAMP-stack-on-the-Raspi/</loc>
     
     <lastmod>2020-07-22</lastmod>
     
   </url>
   
   <url>
-    <loc>http://ajc327.site/2020/07/22/Setting-up-a-blogging-website-using-Hexo/</loc>
+    <loc>http://andycai.top/2020/07/22/Setting-up-a-blogging-website-using-Hexo/</loc>
     
     <lastmod>2020-07-22</lastmod>
     
   </url>
   
   <url>
-    <loc>http://ajc327.site/Comments/index.html</loc>
+    <loc>http://andycai.top/Comments/index.html</loc>
     
     <lastmod>2020-07-21</lastmod>
     
   </url>
   
   <url>
-    <loc>http://ajc327.site/2020/07/20/Setting-up-a-new-Raspberry-Pi-4/</loc>
+    <loc>http://andycai.top/2020/07/20/Setting-up-a-new-Raspberry-Pi-4/</loc>
     
     <lastmod>2020-07-21</lastmod>
     
@@ -59,7 +59,7 @@
   
 
   <url>
-    <loc>http://ajc327.site/</loc>
+    <loc>http://andycai.top/</loc>
     <lastmod>2020-10-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -69,7 +69,7 @@
 
   
   <url>
-    <loc>http://ajc327.site/categories/Book-Review/</loc>
+    <loc>http://andycai.top/categories/Book-Review/</loc>
     <lastmod>2020-10-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
