@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://andycai.top/2020/10/31/gibbs/</loc>
+    
+    <lastmod>2020-10-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://andycai.top/shoestring/index.html</loc>
+    
+    <lastmod>2020-10-24</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://andycai.top/2020/08/22/Hacking-Growth-Notes/</loc>
     
     <lastmod>2020-08-26</lastmod>
@@ -60,17 +74,24 @@
 
   <url>
     <loc>http://andycai.top/</loc>
-    <lastmod>2020-10-21</lastmod>
+    <lastmod>2020-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
+  <url>
+    <loc>http://andycai.top/tags/datascience/</loc>
+    <lastmod>2020-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
     <loc>http://andycai.top/categories/Book-Review/</loc>
-    <lastmod>2020-10-21</lastmod>
+    <lastmod>2020-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
