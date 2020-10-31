@@ -206,7 +206,7 @@
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -252,7 +252,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://andycai.top/2020/07/21/Setting-up-a-LAMP-stack-on-the-Raspi/">
+    <link itemprop="mainEntityOfPage" href="http://andycai.top/2020/07/21/lamp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -266,7 +266,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/21/Setting-up-a-LAMP-stack-on-the-Raspi/" class="post-title-link" itemprop="url">Setting up a LAMP stack on the Raspi</a>
+            <a href="/2020/07/21/lamp/" class="post-title-link" itemprop="url">Setting up a LAMP stack on the Raspi</a>
         </h2>
 
         <div class="post-meta">
@@ -302,7 +302,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install apache2 </span><br><span class="line">sudop apt-get install mysql-server</span><br></pre></td></tr></table></figure>
 
 <p>Here, we encountered a problem here where we got the following message: </p>
-<img src="/2020/07/21/Setting-up-a-LAMP-stack-on-the-Raspi/nosql.png" class="">
+<img src="/2020/07/21/lamp/nosql.png" class="">
 
 <p>This probably means that for the Raspi we need to download something else called <code>mariadb-server</code> instead. We use <code>sudo apt-get install mariadb-server mariadb-client</code> and installed the mariadb-server with few problems.</p>
 <p>Next, we install php using <code>sudo apt-get install php</code>. </p>
@@ -333,7 +333,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service apache2 restart</span><br></pre></td></tr></table></figure>
 
 <p>Now, we can open up a web browser and navigate to <code>localhost/phpMyAdmin</code> and log in with our credentials. </p>
-<img src="/2020/07/21/Setting-up-a-LAMP-stack-on-the-Raspi/myadmin.png" class="">
+<img src="/2020/07/21/lamp/myadmin.png" class="">
 
       
     </div>
@@ -353,7 +353,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://andycai.top/2020/07/20/Setting-up-a-new-Raspberry-Pi-4/">
+    <link itemprop="mainEntityOfPage" href="http://andycai.top/2020/07/20/pi4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -367,7 +367,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/20/Setting-up-a-new-Raspberry-Pi-4/" class="post-title-link" itemprop="url">Setting up a new Raspberry Pi 4</a>
+            <a href="/2020/07/20/pi4/" class="post-title-link" itemprop="url">Setting up a new Raspberry Pi 4</a>
         </h2>
 
         <div class="post-meta">
@@ -384,7 +384,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-21 23:03:14" itemprop="dateModified" datetime="2020-07-21T23:03:14+08:00">2020-07-21</time>
+                <time title="Modified: 2020-10-31 21:21:30" itemprop="dateModified" datetime="2020-10-31T21:21:30+08:00">2020-10-31</time>
               </span>
 
           
@@ -399,7 +399,7 @@
 
       
           <h2 id="Installing-the-Raspberry-Pi-Os"><a href="#Installing-the-Raspberry-Pi-Os" class="headerlink" title="Installing the Raspberry Pi Os"></a>Installing the Raspberry Pi Os</h2><p>The new Raspberry Pi out of the box is just a piece of hardware with no software on it, so we need to first set up an operating system to start using it. Here we chose the recommended Raspberry Pi OS (previously called Raspbian). We can of course install other operating systems like CentOs, Ubuntu etc. </p>
-<img src="/2020/07/20/Setting-up-a-new-Raspberry-Pi-4/osdown.PNG" class="">
+<img src="/2020/07/20/pi4/osdown.PNG" class="">
 
 <p>We can install the Rpi OS in a couple of ways, either using the rpi-imagers available to different operating systems, or we can manually image the OS onto the SD card. In order to do this, we first downloaded a windows disk imager software and using it, successfully imaged the OS onto the card. Note there are numerous choices for imaging software out there and they are pretty much all free. </p>
 <p>We can now remove the SD card and insert it into our Rpi.</p>
@@ -416,19 +416,19 @@
 <li>Use <code>sudo apt-get install nmap</code> then <code>nmap -sn 192.168.5.0/24</code> to ping all the addresses from <code>192.168.5.0</code> to <code>192.168.5.255</code> and return all the ones that connected. This also didn’t show the Raspi. </li>
 <li>Download an IP scanner tool. In this case we downloaded Advanced IP Scanner for Windows 10 and was able to successfully find the Raspi. </li>
 </ol>
-<img src="/2020/07/20/Setting-up-a-new-Raspberry-Pi-4/advanced_ip_scanner.PNG" class="" title="The search results from the Advanced IP Scanner">
+<img src="/2020/07/20/pi4/advanced_ip_scanner.PNG" class="" title="The search results from the Advanced IP Scanner">
 
 <p>Interestingly, after using the advanced IP Scanner to locate the IP address of raspi, the first two methods now also can find the raspi. Note the advanced ip scanner was able to find a lot more other devices on the network such as mobile phones. </p>
 <p>If we are setting up the raspi using a monitor and keyboard, we can enable SSH server from the terminal using <code>sudo raspi-config</code>, however we have already enabled SSH when we included the ssh file in the boot folder. Now it is possible to use an SSH client on other devices to access the raspi using <code>ssh pi@192.168.x.x</code>. As scp (secure copy) is also built on ssh, it is now possible to use scp to send files to the raspi. The command is <code>scp myfile.txt pi@192.168.x.x:~/Desktop</code>, which puts the file on the desktop. </p>
 <hr>
 <h2 id="Setting-up-VNC"><a href="#Setting-up-VNC" class="headerlink" title="Setting up VNC"></a>Setting up VNC</h2><p>To work on the Raspi desktop remotely, we can use VNC. This is a graphical desktop sharing system which allows another device on the same network running a VNC client to access the rapsi, which is running a vnc server. The default included VNC server in the Raspi is the RealVNC server, which we can enable and use. </p>
-<img src="/2020/07/20/Setting-up-a-new-Raspberry-Pi-4/vnc.png" class="" title="A VNC client accessing the Raspi Desktop."> 
+<img src="/2020/07/20/pi4/vnc.png" class="" title="A VNC client accessing the Raspi Desktop."> 
 <p>Install the vnc server using </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install realvnc-vnc-server realvnc-vnc-viewer</span><br></pre></td></tr></table></figure>
 
 <p>Again, we enable the VNC in a headless manner, using </p>
 <pre><code>sudo raspi-config </code></pre><p>Same as before, the VNC service can also be enabled using the Raspi graphical configuration tool, which can be accessed using <code>sudo raspi-config</code>. </p>
-<img src="/2020/07/20/Setting-up-a-new-Raspberry-Pi-4/raspi-config.png" class="" title="The Raspi graphical configuration tool"> 
+<img src="/2020/07/20/pi4/raspi-config.png" class="" title="The Raspi graphical configuration tool"> 
 
 <p>Once we enable the VNC server, we will be able to choose which port to run it on. The RealVPN service includes cloud connection and direct connection, and these are authenticated using RealVNC account credentials and generic VNC password respectively. </p>
 <p>We can now run <code>vncserver</code> to get the server running. </p>
@@ -581,6 +581,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

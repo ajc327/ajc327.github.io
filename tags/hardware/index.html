@@ -22,19 +22,17 @@
     var CONFIG = {"hostname":"andycai.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.4","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Creating the user repo on GithubAssuming we already have a Github account, we need to first log in to our personal page, then create a personal repository. Note that the name of this repository needs">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Deploying the Hexo website to Github">
-<meta property="og:url" content="http://andycai.top/2020/08/19/Deploying-the-Hexo-website-to-Github/index.html">
+  <meta name="description" content="This started as a project for learning  computer science and operating systems. I will document some of the things I did, the problems I encountered and the solutions.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Andy C&#39;s Blog">
+<meta property="og:url" content="http://andycai.top/tags/hardware/index.html">
 <meta property="og:site_name" content="Andy C&#39;s Blog">
-<meta property="og:description" content="Creating the user repo on GithubAssuming we already have a Github account, we need to first log in to our personal page, then create a personal repository. Note that the name of this repository needs">
+<meta property="og:description" content="This started as a project for learning  computer science and operating systems. I will document some of the things I did, the problems I encountered and the solutions.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-08-18T17:34:55.000Z">
-<meta property="article:modified_time" content="2020-08-18T17:34:55.107Z">
 <meta property="article:author" content="Andy Cai">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://andycai.top/2020/08/19/Deploying-the-Hexo-website-to-Github/">
+<link rel="canonical" href="http://andycai.top/tags/hardware/">
 
 
 <script id="page-configurations">
@@ -42,12 +40,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'en'
   };
 </script>
 
-  <title>Deploying the Hexo website to Github | Andy C's Blog</title>
+  <title>Tag: hardware | Andy C's Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-181016286-1"></script>
     <script>
@@ -175,7 +173,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -187,7 +185,6 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Creating-the-user-repo-on-Github"><span class="nav-number">1.</span> <span class="nav-text">Creating the user repo on Github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generating-SSH-key-and-providing-it-to-Github"><span class="nav-number">2.</span> <span class="nav-text">Generating SSH key and providing it to Github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deployment"><span class="nav-number">3.</span> <span class="nav-text">Deployment</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -209,7 +206,7 @@
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -249,133 +246,57 @@
       <div class="main-inner">
         
 
-        <div class="content post posts-expand">
+        <div class="content tag">
           
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://andycai.top/2020/08/19/Deploying-the-Hexo-website-to-Github/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Andy Cai">
-      <meta itemprop="description" content="This started as a project for learning  computer science and operating systems. I will document some of the things I did, the problems I encountered and the solutions.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy C's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Deploying the Hexo website to Github
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-19 01:34:55" itemprop="dateCreated datePublished" datetime="2020-08-19T01:34:55+08:00">2020-08-19</time>
-            </span>
-
-          
-            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h2 id="Creating-the-user-repo-on-Github"><a href="#Creating-the-user-repo-on-Github" class="headerlink" title="Creating the user repo on Github"></a>Creating the user repo on Github</h2><p>Assuming we already have a Github account, we need to first log in to our personal page, then create a personal repository. Note that the name of this repository needs to strictly follow the format <code>githubID.github.io</code>, or else our hexo server will fail to deploy to Github. </p>
-<h2 id="Generating-SSH-key-and-providing-it-to-Github"><a href="#Generating-SSH-key-and-providing-it-to-Github" class="headerlink" title="Generating SSH key and providing it to Github"></a>Generating SSH key and providing it to Github</h2><p>Now we need to return to the git bash on the web server, and configure git so that it has our credentials: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">git config --global user.name &quot;myusername&quot;</span><br><span class="line">git config --global user.email &quot;youremail&quot; </span><br></pre></td></tr></table></figure>
-
-<p>Next, we need to generate a private public key pair so that github can use the public key to communicate with our machine using ssh. </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">ssh-keygen -t rsa -C &quot;youremail&quot;</span><br></pre></td></tr></table></figure>
-
-<p>The code above will create a .ssh folder if it does not exist, in the root folder. In this folder there will be a <code>id_rsa.pub</code> file, which is the public key. We will upload this to Github. </p>
-<h2 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h2><p>Now, we can actually connect the hexo server and the Github repo. This step will upload the files generated by hexo into the GitHub repo, so we can access the website publicly through the GitHub server. To do this, we first add the relevant deployment information in the <code>_config.yml</code> page. We can edit it using <code>sudo geany _config.yml</code>. </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">deploy: </span><br><span class="line">	type:git </span><br><span class="line">	repo: https:&#x2F;&#x2F;github.com&#x2F;id&#x2F;id.github.io.git</span><br><span class="line">	branch: master </span><br></pre></td></tr></table></figure>
-
-<p>Now we need to install the deployment software as well, using <code>npm install hexo-deployer-git --save</code>.</p>
-<p>Finally, we can use the following to clean the folder, generate the static articles, then deploy the website. </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">hexo clean </span><br><span class="line">hexo generate </span><br><span class="line">hexo deploy </span><br></pre></td></tr></table></figure>
-
-<p>If we now visit <code>http://id.github.io</code> we will be able to see the website. However, this is a rather random address to remember, so we can give the website a personalised address. We can do this by buying a domain name such as <code>andycai.top</code> from vendors such as godaddy or alicloud. A more common suffix like .com may be more expensive. After buying the domain name, we can set up an CNAME (canonical Name record) for the domain, essentially making it an alias of our default <code>id.github.io</code> domain. </p>
-<p>Now, we can access our website from the new domain name <code>andycai.top</code>.</p>
-
-    </div>
-
-    
-    
-    
-        <div class="reward-container">
-  <div>Please consider supporting a poor uni student.</div>
-  <button onclick="document.getElementById('post-reward').classList.toggle('active');">
-    Donate
-  </button>
-  <div id="post-reward">
-      
-      <div>
-        <img src="/images/wechatpay.png" alt="Andy Cai WeChat Pay">
-        <p>WeChat Pay</p>
-      </div>
-      
-      <div>
-        <img src="/images/paypal.png" alt="Andy Cai PayPal">
-        <p>PayPal</p>
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">hardware
+          <small>Tag</small>
+        </h2>
       </div>
 
-  </div>
-</div>
-
-
-      <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/07/22/Setting-up-a-blogging-website-using-Hexo/" rel="prev" title="Setting up a blogging website using Hexo">
-      <i class="fa fa-chevron-left"></i> Setting up a blogging website using Hexo
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/08/19/SQL-basics/" rel="next" title="MySQL basics">
-      MySQL basics <i class="fa fa-chevron-right"></i>
-    </a></div>
+      
+    <div class="collection-year">
+      <span class="collection-header">2020</span>
     </div>
-      </footer>
-    
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-07-20T17:42:03+08:00"
+              content="2020-07-20">
+          07-20
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2020/07/20/pi4/" itemprop="url">
+            <span itemprop="name">Setting up a new Raspberry Pi 4</span>
+          </a>
+      </div>
+
+    </header>
   </article>
+
+    </div>
+  </div>
   
   
+  
+
   
 
 
 
         </div>
         
-    
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC81MTEwMS8yNzU4Mg=="></div>
-  </div>
-  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -494,22 +415,62 @@
   
 
   
+      
 
 <script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
-  window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-});
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
 </script>
+
+    
+
+  
+
 
 </body>
 </html>

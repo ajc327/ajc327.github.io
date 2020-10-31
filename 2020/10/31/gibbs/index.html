@@ -29,15 +29,15 @@
 <meta property="og:site_name" content="Andy C&#39;s Blog">
 <meta property="og:description" content="Gibbs SamplingMotivationIn many inference tasks, it is necessary to integrate out variables. However, this may not always be possible as the integral may not be an analytically trackable function. Tha">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://andycai.top/2020/10/31/gibbs/Gibbs%20sampling_files/Gibbs%20sampling_3_0.png">
-<meta property="og:image" content="http://andycai.top/2020/10/31/gibbs/Gibbs%20sampling_files/Gibbs%20sampling_6_0.png">
-<meta property="og:image" content="http://andycai.top/2020/10/31/gibbs/Gibbs%20sampling_files/Gibbs%20sampling_9_0.png">
+<meta property="og:image" content="http://andycai.top/2020/10/31/gibbs/1.png">
+<meta property="og:image" content="http://andycai.top/2020/10/31/gibbs/2.png">
+<meta property="og:image" content="http://andycai.top/2020/10/31/gibbs/3.png">
 <meta property="article:published_time" content="2020-10-31T12:53:27.000Z">
-<meta property="article:modified_time" content="2020-10-31T13:02:46.938Z">
+<meta property="article:modified_time" content="2020-10-31T13:43:15.120Z">
 <meta property="article:author" content="Andy Cai">
 <meta property="article:tag" content="datascience">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://andycai.top/2020/10/31/gibbs/Gibbs%20sampling_files/Gibbs%20sampling_3_0.png">
+<meta name="twitter:image" content="http://andycai.top/2020/10/31/gibbs/1.png">
 
 <link rel="canonical" href="http://andycai.top/2020/10/31/gibbs/">
 
@@ -214,7 +214,7 @@
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -285,7 +285,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-10-31 20:53:27 / Modified: 21:02:46" itemprop="dateCreated datePublished" datetime="2020-10-31T20:53:27+08:00">2020-10-31</time>
+              <time title="Created: 2020-10-31 20:53:27 / Modified: 21:43:15" itemprop="dateCreated datePublished" datetime="2020-10-31T20:53:27+08:00">2020-10-31</time>
             </span>
 
           
@@ -307,25 +307,29 @@
 
       
         <h1 id="Gibbs-Sampling"><a href="#Gibbs-Sampling" class="headerlink" title="Gibbs Sampling"></a>Gibbs Sampling</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>In many inference tasks, it is necessary to integrate out variables. However, this may not always be possible as the integral may not be an analytically trackable function. Thankfully, we can leverage the law of large numbers to estimate these integrals from sampling. This means if we want to estimate $\phi = \int \phi(x) p(x) dx$, we can simply sample from the joint distribution $p(x)$. We can take the empirical average $ \frac{1}{N} \sum_{i=1}^N \phi(x_i)$, for large enough N this would converge to the actual mean. The problem is that the form of $ p(x) $ may be undesirable and sampling can be made difficult. One method to deal with this problem is using Gibbs sampling, which samples from the conditional distribution instead. </p>
-<h2 id="Gibbs-Sampling-method"><a href="#Gibbs-Sampling-method" class="headerlink" title="Gibbs Sampling method"></a>Gibbs Sampling method</h2><p>For each component i of x in turn, sample a new value from the conditional distribution of $x_i$ given all other $x_{j\neq i}$:<br>\begin{align}<br>    x_i &amp; \sim p(x_i|x1,…,x_{i-1},x{i+1},…,x_D)<br>\end{align}</p>
+<h2 id="Gibbs-Sampling-method"><a href="#Gibbs-Sampling-method" class="headerlink" title="Gibbs Sampling method"></a>Gibbs Sampling method</h2><p>For each component i of x in turn, sample a new value from the conditional distribution of $x_i$ given all other $x_{j\neq i}$:<br>$\begin{align}<br>    x_i &amp; \sim p(x_i|x1,…,x_{i-1},x{i+1},…,x_D)<br>\end{align} $</p>
 <p>This eventually generates dependent samples from the joint distribution $p(x)$. </p>
 <h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>In this notebook I implement a Gibbs sampler, for both 2D and 3D distributions. This has taken inspiration from the materials in the Cambridge University Probablistic Machine Learning Course. </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tools <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </span><br><span class="line"><span class="keyword">from</span> scipy.linalg <span class="keyword">import</span> sqrtm</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.animation <span class="keyword">as</span> animation</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
 
 <h3 id="Function-to-visualise-a-Guassian-with-a-given-variance"><a href="#Function-to-visualise-a-Guassian-with-a-given-variance" class="headerlink" title="Function to visualise a Guassian with a given variance"></a>Function to visualise a Guassian with a given variance</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_gaussian</span><span class="params">(cov,mu,n,ax)</span>:</span></span><br><span class="line">    mu = np.reshape(a=mu, newshape=(<span class="number">2</span>,<span class="number">1</span>))</span><br><span class="line">    theta = np.divide(range(n),(n<span class="number">-1</span>))*<span class="number">2</span>*np.pi</span><br><span class="line">    epoints = np.matmul(sqrtm(cov),[np.cos(theta),np.sin(theta)])</span><br><span class="line">    epoints += np.matmul(mu, np.ones((<span class="number">1</span>,n)))</span><br><span class="line">    ax.plot(epoints[<span class="number">0</span>,:],epoints[<span class="number">1</span>,:])</span><br><span class="line">    ax.scatter(mu[<span class="number">0</span>,:],mu[<span class="number">1</span>,:],c =<span class="string">'r'</span>, s=<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">plot_gaussian([[<span class="number">1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">1</span>]],[<span class="number">1</span>,<span class="number">1</span>],<span class="number">60</span>, ax= ax)</span><br></pre></td></tr></table></figure>
 
+<img src="/2020/10/31/gibbs/1.png" class="" title="Gaussian function"> 
 
-<p><img src="Gibbs%20sampling_files/Gibbs%20sampling_3_0.png" alt="png"></p>
+
+
 <h3 id="The-Gibbs-sampler-to-sample-from-the-2D-Gaussian"><a href="#The-Gibbs-sampler-to-sample-from-the-2D-Gaussian" class="headerlink" title="The Gibbs sampler to sample from the 2D Gaussian"></a>The Gibbs sampler to sample from the 2D Gaussian</h3><p>This function first plots the joint Gaussian distribution on the random walk axes, using the previously defined function. This allows the target distribution to be visualised. </p>
 <p>The gibbs2 function then iterates throught the number of iterations require. For each iteration, it computes the conditional distribution of x given y, and vice versa. These give $p(x|y)$ and $p(y|x)$ to sample from. The conditionals are obtained by segmenting the covariance matrix in to sub matrices </p>
-<p>\begin{align}<br>    p(x,y) &amp; = \mathcal{N}\left( \begin{bmatrix} a \b \end{bmatrix}, \begin{bmatrix} A &amp; B \ B^T &amp; C \end{bmatrix}\right) \<br>    &amp; \to \<br>    p(x|y) &amp; = \mathcal{N}(a+BC^{-1}(y-b), A-BC^{-1}B^T)<br>\end{align}</p>
+<p>\begin{align}<br>    p(x,y) &amp; = \mathcal{N}\left( \begin{bmatrix} a \ b \end{bmatrix}, \begin{bmatrix} A &amp; B \ B^T &amp; C \end{bmatrix}\right) \<br>    &amp; \to \<br>    p(x|y) &amp; = \mathcal{N}(a+BC^{-1}(y-b), A-BC^{-1}B^T)<br>\end{align}</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gibbs2</span><span class="params">(N, ax1,ax2,cov=[[<span class="number">1</span>, <span class="number">0.5</span>],[<span class="number">0.5</span>,<span class="number">1</span>]], m =[<span class="number">0</span>,<span class="number">0</span>])</span>:</span></span><br><span class="line">    cov = np.array(cov)</span><br><span class="line">    ci = np.linalg.inv(cov)</span><br><span class="line">    <span class="comment"># init x at -2,2 </span></span><br><span class="line">    x = <span class="number">-2</span></span><br><span class="line">    y = <span class="number">2</span></span><br><span class="line">    plot_gaussian(cov=<span class="number">4</span>*cov, ax=ax1,mu=m,n=<span class="number">300</span>)</span><br><span class="line">    xx=[x]</span><br><span class="line">    yy=[y]</span><br><span class="line"></span><br><span class="line">    diff_list =[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        xold = x</span><br><span class="line">        yold = y</span><br><span class="line">        x= -ci[<span class="number">0</span>,<span class="number">1</span>]*y/ci[<span class="number">0</span>,<span class="number">0</span>] + np.random.randn()/np.sqrt(ci[<span class="number">0</span>,<span class="number">0</span>])</span><br><span class="line">        <span class="comment">#print([xold,x])</span></span><br><span class="line">        ax1.plot([xold,x],[yold,y])</span><br><span class="line">        xold = x;</span><br><span class="line">        y = -ci[<span class="number">0</span>,<span class="number">1</span>]*x/ci[<span class="number">1</span>,<span class="number">1</span>]+ np.random.randn()/np.sqrt(ci[<span class="number">1</span>,<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">if</span> len(xx)&gt;<span class="number">1</span>:</span><br><span class="line">            emp_cov = np.cov(np.array(xx),np.array(yy))</span><br><span class="line">            diff = -abs(cov-emp_cov).sum()</span><br><span class="line">            diff_list.append(diff)</span><br><span class="line">            ax2.clear()</span><br><span class="line">            ax2.plot(diff_list)</span><br><span class="line">            ax2.set_title(<span class="string">'Convergence plot'</span>)</span><br><span class="line"></span><br><span class="line">            ax2.set_xlabel(<span class="string">'iterations'</span>)</span><br><span class="line">            ax2.set_ylabel(<span class="string">'Empirical Covariance Matrix Error'</span>)</span><br><span class="line"></span><br><span class="line">        ax1.plot([xold,x],[yold,y])</span><br><span class="line">        ax1.scatter(x,y, s= <span class="number">30</span>)</span><br><span class="line">        xx.append(x)</span><br><span class="line">        yy.append(y)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Uncomment this section and set %matplotlib to none to see live plot</span></span><br><span class="line">        <span class="comment">#plt.draw()</span></span><br><span class="line">        <span class="comment">#if i ==0:</span></span><br><span class="line">            <span class="comment">#plt.pause(0.1)</span></span><br><span class="line">        <span class="comment">#plt.pause(0.005)</span></span><br></pre></td></tr></table></figure>
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">20</span>,<span class="number">10</span>))</span><br><span class="line">ax1= plt.subplot(<span class="number">211</span>)</span><br><span class="line">fig.suptitle(<span class="string">'Gibbs Sampling process on a 2D Gaussian distribution and Convergence plot'</span>,fontsize=<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">ax1.set_xlabel(<span class="string">'x1'</span>)</span><br><span class="line">ax1.set_ylabel(<span class="string">'x2'</span>)</span><br><span class="line">ax1.set_title(<span class="string">'Markov Chain Random Walk'</span>)</span><br><span class="line"></span><br><span class="line">ax2= plt.subplot(<span class="number">212</span>)</span><br><span class="line">ax2.set_title(<span class="string">'Convergence plot'</span>)</span><br><span class="line"></span><br><span class="line">ax2.set_xlabel(<span class="string">'iterations'</span>)</span><br><span class="line"><span class="comment">#plt.ion()</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#ani = animation.FuncAnimation(figs,animate, interval=1000)</span></span><br><span class="line"><span class="comment">#plt.show()</span></span><br><span class="line">gibbs2(<span class="number">100</span>,ax1,ax2)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 
 
-<p><img src="Gibbs%20sampling_files/Gibbs%20sampling_6_0.png" alt="png"></p>
+<img src="/2020/10/31/gibbs/2.png" class=""> 
+
+
 <h2 id="Function-to-sample-from-the-3-dimensional-Gaussian"><a href="#Function-to-sample-from-the-3-dimensional-Gaussian" class="headerlink" title="Function to sample from the 3 dimensional Gaussian"></a>Function to sample from the 3 dimensional Gaussian</h2><p>For the trivariate Guassian, the conditionals are more tricky to compute, as in the 2D case the conditional probability equations boil down to a set of scalars, where as in this case we see that matrices $A,B,C$ are matrices. We use a for loop to generate these matrices when we look at each of the variables [x1,x2,x3]. </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gibbs3</span><span class="params">(N, ax1,ax,cov=[[<span class="number">1</span>, <span class="number">0.5</span>,<span class="number">0.3</span>],[<span class="number">0.5</span>,<span class="number">1</span>,<span class="number">0.2</span>],[<span class="number">0.3</span>,<span class="number">0.2</span>,<span class="number">1</span>]], mu =[<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>])</span>:</span></span><br><span class="line">    cov = np.array(cov)</span><br><span class="line">    <span class="comment"># init x at -2,2 </span></span><br><span class="line">    x = np.array([<span class="number">-2.0</span>,<span class="number">2.0</span>,<span class="number">2.0</span>])</span><br><span class="line">    mu = np.array(mu)</span><br><span class="line">    xx=np.array([[],[],[]])</span><br><span class="line">    diff_list=[]</span><br><span class="line">    xold=[<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>]</span><br><span class="line">    xold[<span class="number">0</span>]= x[<span class="number">0</span>]</span><br><span class="line">    xold[<span class="number">1</span>]=x[<span class="number">1</span>]</span><br><span class="line">    xold[<span class="number">2</span>]=x[<span class="number">2</span>]</span><br><span class="line">    ite=[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">            ind_list = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">            ind_list.remove(j)</span><br><span class="line">            B=np.array([cov[j,ind_list[<span class="number">0</span>]],cov[j,ind_list[<span class="number">1</span>]]])</span><br><span class="line">            C=np.array([[cov[ind_list[<span class="number">0</span>],ind_list[<span class="number">0</span>]],cov[ind_list[<span class="number">0</span>],ind_list[<span class="number">1</span>]]],[cov[ind_list[<span class="number">1</span>],ind_list[<span class="number">0</span>]],cov[ind_list[<span class="number">1</span>],ind_list[<span class="number">1</span>]]]])</span><br><span class="line">            Ci = np.linalg.inv(C)</span><br><span class="line">            D = np.array(np.subtract([x[k] <span class="keyword">for</span> k <span class="keyword">in</span> ind_list],[mu[k] <span class="keyword">for</span> k <span class="keyword">in</span> ind_list]))</span><br><span class="line">            mean= mu[j]+np.matmul(np.matmul(B,Ci),D) </span><br><span class="line">            dev = np.sqrt(cov[j,j]-np.matmul(np.matmul(B,Ci),B.T))</span><br><span class="line">            x[j] =float(mean)+np.random.randn()/float(dev)</span><br><span class="line"></span><br><span class="line">            ax1.plot([xold[<span class="number">0</span>],x[<span class="number">0</span>]],[xold[<span class="number">1</span>],x[<span class="number">1</span>]],[xold[<span class="number">2</span>],x[<span class="number">2</span>]],alpha = <span class="number">0.3</span>)</span><br><span class="line">            ax1.scatter(*x,s=<span class="number">20</span>,alpha=<span class="number">0.4</span>)</span><br><span class="line">            xx=np.concatenate((xx,np.reshape(x.T,(<span class="number">3</span>,<span class="number">1</span>))), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            xold[j]=x[j]</span><br><span class="line">            <span class="keyword">if</span> len(xx[<span class="number">0</span>])&gt;<span class="number">3</span> <span class="keyword">and</span> len(xx[<span class="number">0</span>])%<span class="number">8</span>==<span class="number">1</span>:</span><br><span class="line">                emp_cov = np.cov(np.array(xx))</span><br><span class="line">                diff = abs(cov-emp_cov).sum()</span><br><span class="line">                diff_list.append(diff)</span><br><span class="line">                ax.clear()</span><br><span class="line">                ax.plot(ite,diff_list)</span><br><span class="line">                ax.set_title(<span class="string">'Convergence Plot'</span>)</span><br><span class="line">                ax.set_ylabel(<span class="string">'Covariance matrix absolute error'</span>)</span><br><span class="line">                ax.set_xlabel(<span class="string">'Iteration'</span>)</span><br><span class="line">                ite.append(ite[<span class="number">-1</span>]+<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">            <span class="comment">#plt.draw()</span></span><br><span class="line">            <span class="comment">#if i ==0:</span></span><br><span class="line">                <span class="comment">#plt.pause(0.1)</span></span><br><span class="line">           <span class="comment"># plt.pause(0.002)</span></span><br></pre></td></tr></table></figure>
 
@@ -333,8 +337,10 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">14</span>,<span class="number">5</span>))</span><br><span class="line">ax1= plt.subplot(<span class="number">121</span>,projection=<span class="string">'3d'</span>)</span><br><span class="line">ax1.set_title(<span class="string">'Markov Chain Monte Carlo Random Walk on trivariate Gaussian'</span>)</span><br><span class="line">ax1.set_xlabel(<span class="string">'x1'</span>)</span><br><span class="line">ax1.set_ylabel(<span class="string">'x2'</span>)</span><br><span class="line">ax1.set_zlabel(<span class="string">'x3'</span>)</span><br><span class="line"></span><br><span class="line">ax=plt.subplot(<span class="number">122</span>)</span><br><span class="line">ax.set_title(<span class="string">'Convergence Plot'</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">'Covariance matrix absolute error'</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">'Iteration'</span>)</span><br><span class="line">plt.ion()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#ani = animation.FuncAnimation(figs,animate, interval=1000)</span></span><br><span class="line"><span class="comment">#plt.show()</span></span><br><span class="line">gibbs3(<span class="number">300</span>,ax1,ax)</span><br></pre></td></tr></table></figure>
 
 
-<p><img src="Gibbs%20sampling_files/Gibbs%20sampling_9_0.png" alt="png"></p>
-<h2 id="Interpretation-of-results-and-conclusion"><a href="#Interpretation-of-results-and-conclusion" class="headerlink" title="Interpretation of results and conclusion"></a>Interpretation of results and conclusion</h2><p>The gibbs sampler was able to successfully sample from the 2D and 3D distributions. It was observed that for the 2D case, the algorithm very rapidly converged in under 50 iterations. This means the variance of the sampled data was able to rapidly become similar to the expected distribution. However, for the 3D case, very slow convergence behaviour has been observed. The reason for this is currently unclear, and could be a consequence of the </p>
+<img src="/2020/10/31/gibbs/3.png" class=""> 
+
+
+<h2 id="Interpretation-of-results-and-conclusion"><a href="#Interpretation-of-results-and-conclusion" class="headerlink" title="Interpretation of results and conclusion"></a>Interpretation of results and conclusion</h2><p>The gibbs sampler was able to successfully sample from the 2D and 3D distributions. It was observed that for the 2D case, the algorithm very rapidly converged in under 50 iterations. This means the variance of the sampled data was able to rapidly become similar to the expected distribution. However, for the 3D case, very slow convergence behaviour has been observed. The reason for this is currently unclear, and could be a consequence of how the convergence is defined. </p>
 
     </div>
 
@@ -373,7 +379,7 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/08/22/Hacking-Growth-Notes/" rel="prev" title="Hacking Growth Notes">
+    <a href="/2020/08/22/hg/" rel="prev" title="Hacking Growth Notes">
       <i class="fa fa-chevron-left"></i> Hacking Growth Notes
     </a></div>
       <div class="post-nav-item"></div>
@@ -510,6 +516,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

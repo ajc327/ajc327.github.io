@@ -9,6 +9,13 @@
   </url>
   
   <url>
+    <loc>http://andycai.top/2020/07/20/pi4/</loc>
+    
+    <lastmod>2020-10-31</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://andycai.top/shoestring/index.html</loc>
     
     <lastmod>2020-10-24</lastmod>
@@ -16,7 +23,7 @@
   </url>
   
   <url>
-    <loc>http://andycai.top/2020/08/22/Hacking-Growth-Notes/</loc>
+    <loc>http://andycai.top/2020/08/22/hg/</loc>
     
     <lastmod>2020-08-26</lastmod>
     
@@ -37,21 +44,21 @@
   </url>
   
   <url>
-    <loc>http://andycai.top/2020/08/19/Deploying-the-Hexo-website-to-Github/</loc>
+    <loc>http://andycai.top/2020/08/19/hexo_git/</loc>
     
     <lastmod>2020-08-18</lastmod>
     
   </url>
   
   <url>
-    <loc>http://andycai.top/2020/07/21/Setting-up-a-LAMP-stack-on-the-Raspi/</loc>
+    <loc>http://andycai.top/2020/07/21/lamp/</loc>
     
     <lastmod>2020-07-22</lastmod>
     
   </url>
   
   <url>
-    <loc>http://andycai.top/2020/07/22/Setting-up-a-blogging-website-using-Hexo/</loc>
+    <loc>http://andycai.top/2020/07/22/hexoweb/</loc>
     
     <lastmod>2020-07-22</lastmod>
     
@@ -59,13 +66,6 @@
   
   <url>
     <loc>http://andycai.top/Comments/index.html</loc>
-    
-    <lastmod>2020-07-21</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://andycai.top/2020/07/20/Setting-up-a-new-Raspberry-Pi-4/</loc>
     
     <lastmod>2020-07-21</lastmod>
     
@@ -82,6 +82,13 @@
   
   <url>
     <loc>http://andycai.top/tags/datascience/</loc>
+    <lastmod>2020-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://andycai.top/tags/hardware/</loc>
     <lastmod>2020-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
