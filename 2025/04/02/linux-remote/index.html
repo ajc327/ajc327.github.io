@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#020261"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#020261">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Linux Remote Development: Tricks and Workflows1. SSH Tunnel MasteryDebugging Connections1ssh -vv user@remote_host  # Verbose debugging output  1.1 Local Port ForwardingAccess blocked resources through">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Remote Development">
+<meta property="og:url" content="http://example.com/2025/04/02/linux-remote/index.html">
+<meta property="og:site_name" content="Efficient Corner">
+<meta property="og:description" content="Linux Remote Development: Tricks and Workflows1. SSH Tunnel MasteryDebugging Connections1ssh -vv user@remote_host  # Verbose debugging output  1.1 Local Port ForwardingAccess blocked resources through">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-04-02T10:04:54.000Z">
+<meta property="article:modified_time" content="2025-04-02T10:46:10.970Z">
+<meta property="article:author" content="Andy Cai">
+<meta property="article:tag" content="Coding">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/04/02/linux-remote/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/04/02/linux-remote/","path":"2025/04/02/linux-remote/","title":"Linux Remote Development"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux Remote Development | Efficient Corner</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Efficient Corner</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Condensation of experiences</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-Remote-Development-Tricks-and-Workflows"><span class="nav-number">1.</span> <span class="nav-text">Linux Remote Development: Tricks and Workflows</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-SSH-Tunnel-Mastery"><span class="nav-number">1.1.</span> <span class="nav-text">1. SSH Tunnel Mastery</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Debugging-Connections"><span class="nav-number">1.1.1.</span> <span class="nav-text">Debugging Connections</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Local-Port-Forwarding"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.1 Local Port Forwarding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Dynamic-SOCKS-Proxy"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.2 Dynamic SOCKS Proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Reverse-Tunneling-Magic"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.3 Reverse Tunneling Magic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-Auto-maintained-Reverse-Tunnel"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.4 Auto-maintained Reverse Tunnel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Multi-hop-SSH-Gateway"><span class="nav-number">1.2.</span> <span class="nav-text">2. Multi-hop SSH Gateway</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Smart-ssh-config-Setup"><span class="nav-number">1.2.1.</span> <span class="nav-text">Smart ~&#x2F;.ssh&#x2F;config Setup</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Terminal-Multiplexing-with-TMUX"><span class="nav-number">1.3.</span> <span class="nav-text">3. Terminal Multiplexing with TMUX</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Essential-Shortcuts"><span class="nav-number">1.3.1.</span> <span class="nav-text">Essential Shortcuts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fix-Layout-Issues"><span class="nav-number">1.3.2.</span> <span class="nav-text">Fix Layout Issues</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Systemd-Service-Management"><span class="nav-number">1.4.</span> <span class="nav-text">4. Systemd Service Management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Persistent-Tunnel-Service"><span class="nav-number">1.4.1.</span> <span class="nav-text">Create Persistent Tunnel Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Startup-Optimization"><span class="nav-number">1.4.2.</span> <span class="nav-text">Startup Optimization</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Pro-Tips-for-Production"><span class="nav-number">1.5.</span> <span class="nav-text">5. Pro Tips for Production</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Takeaways"><span class="nav-number">1.6.</span> <span class="nav-text">Key Takeaways</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Andy Cai</p>
+  <div class="site-description" itemprop="description">A quantitative portfolio manager passionate about dissecting complexity at the intersection of finance, math, and technology. This site is my digital lab—a space where I document technical deep dives, code snippets, and analytical explorations into algorithmic trading, risk modeling, data science, and the occasional offbeat problem that sparks my curiosity.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ajc327" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ajc327" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:andycai517@gmail.com" title="E-Mail → mailto:andycai517@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/02/linux-remote/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Efficient Corner">
+      <meta itemprop="description" content="A quantitative portfolio manager passionate about dissecting complexity at the intersection of finance, math, and technology. This site is my digital lab—a space where I document technical deep dives, code snippets, and analytical explorations into algorithmic trading, risk modeling, data science, and the occasional offbeat problem that sparks my curiosity.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Linux Remote Development | Efficient Corner">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux Remote Development
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-04-02 18:04:54 / Modified: 18:46:10" itemprop="dateCreated datePublished" datetime="2025-04-02T18:04:54+08:00">2025-04-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Linux-Remote-Development-Tricks-and-Workflows"><a href="#Linux-Remote-Development-Tricks-and-Workflows" class="headerlink" title="Linux Remote Development: Tricks and Workflows"></a>Linux Remote Development: Tricks and Workflows</h1><h2 id="1-SSH-Tunnel-Mastery"><a href="#1-SSH-Tunnel-Mastery" class="headerlink" title="1. SSH Tunnel Mastery"></a>1. SSH Tunnel Mastery</h2><h3 id="Debugging-Connections"><a href="#Debugging-Connections" class="headerlink" title="Debugging Connections"></a>Debugging Connections</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -vv user@remote_host  <span class="comment"># Verbose debugging output</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-Local-Port-Forwarding"><a href="#1-1-Local-Port-Forwarding" class="headerlink" title="1.1 Local Port Forwarding"></a>1.1 Local Port Forwarding</h3><p>Access blocked resources through intermediate server:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 8181:target_host:3389 user@jump_host  <span class="comment"># Tunnel through jump host</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-Dynamic-SOCKS-Proxy"><a href="#1-2-Dynamic-SOCKS-Proxy" class="headerlink" title="1.2 Dynamic SOCKS Proxy"></a>1.2 Dynamic SOCKS Proxy</h3><p>Bypass network restrictions:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -D 8181 user@proxy_host  <span class="comment"># Creates SOCKS5 proxy on local port 8181</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-Reverse-Tunneling-Magic"><a href="#1-3-Reverse-Tunneling-Magic" class="headerlink" title="1.3 Reverse Tunneling Magic"></a>1.3 Reverse Tunneling Magic</h3><p>Expose local services behind NAT:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Run on local machine behind firewall</span></span><br><span class="line">ssh -R 10022:localhost:22 user@public_server  <span class="comment"># Expose SSH via public server</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-Auto-maintained-Reverse-Tunnel"><a href="#1-4-Auto-maintained-Reverse-Tunnel" class="headerlink" title="1.4 Auto-maintained Reverse Tunnel"></a>1.4 Auto-maintained Reverse Tunnel</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">autossh -M 5000 -fNTR 10022:localhost:22 user@cloud_server</span><br></pre></td></tr></table></figure>
+<p><strong>Pro Tip</strong>: Use <code>lsof -i -P -n | grep LISTEN</code> to troubleshoot port conflicts</p>
+<h2 id="2-Multi-hop-SSH-Gateway"><a href="#2-Multi-hop-SSH-Gateway" class="headerlink" title="2. Multi-hop SSH Gateway"></a>2. Multi-hop SSH Gateway</h2><h3 id="Smart-ssh-config-Setup"><a href="#Smart-ssh-config-Setup" class="headerlink" title="Smart ~&#x2F;.ssh&#x2F;config Setup"></a>Smart ~&#x2F;.ssh&#x2F;config Setup</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Host cloud_gateway</span><br><span class="line">    HostName andycai.top</span><br><span class="line">    User ubuntu</span><br><span class="line">    IdentityFile ~/.ssh/cloud_key</span><br><span class="line"></span><br><span class="line">Host company_raspi</span><br><span class="line">    HostName localhost</span><br><span class="line">    Port 10022</span><br><span class="line">    ProxyCommand ssh -W %h:%p cloud_gateway</span><br><span class="line"></span><br><span class="line">Host internal_server</span><br><span class="line">    HostName inno-srv41</span><br><span class="line">    User cjt</span><br><span class="line">    ProxyCommand ssh -W %h:%p company_raspi</span><br></pre></td></tr></table></figure>
+<p>Access internal servers directly with:<br><code>ssh internal_server</code></p>
+<h2 id="3-Terminal-Multiplexing-with-TMUX"><a href="#3-Terminal-Multiplexing-with-TMUX" class="headerlink" title="3. Terminal Multiplexing with TMUX"></a>3. Terminal Multiplexing with TMUX</h2><h3 id="Essential-Shortcuts"><a href="#Essential-Shortcuts" class="headerlink" title="Essential Shortcuts"></a>Essential Shortcuts</h3><ul>
+<li><strong>Split Panes</strong><br><code>Ctrl-b %</code> Vertical | <code>Ctrl-b &quot;</code> Horizontal</li>
+<li><strong>Session Management</strong><br><code>Ctrl-b d</code> Detach | <code>tmux attach</code> Reconnect</li>
+<li><strong>Window Control</strong><br><code>Ctrl-b c</code> New window | <code>Ctrl-b n/p</code> Cycle windows</li>
+</ul>
+<h3 id="Fix-Layout-Issues"><a href="#Fix-Layout-Issues" class="headerlink" title="Fix Layout Issues"></a>Fix Layout Issues</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux detach-client -a  <span class="comment"># Reset misbehaving sessions</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Systemd-Service-Management"><a href="#4-Systemd-Service-Management" class="headerlink" title="4. Systemd Service Management"></a>4. Systemd Service Management</h2><h3 id="Create-Persistent-Tunnel-Service"><a href="#Create-Persistent-Tunnel-Service" class="headerlink" title="Create Persistent Tunnel Service"></a>Create Persistent Tunnel Service</h3><ol>
+<li>Create service file:</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nano /etc/systemd/system/piTunnel.service</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Service definition:</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Persistent Reverse SSH Tunnel</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=pi</span><br><span class="line">ExecStart=/usr/bin/autossh -M 0 -NTR 10022:localhost:22 cloud_server</span><br><span class="line">Restart=always</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Enable and monitor:</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl daemon-reload</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> piTunnel</span><br><span class="line">systemctl status piTunnel  <span class="comment"># Verify operation</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Startup-Optimization"><a href="#Startup-Optimization" class="headerlink" title="Startup Optimization"></a>Startup Optimization</h3><p>Generate dependency graph:  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemd-analyze plot &gt; boot_analysis.svg</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-Pro-Tips-for-Production"><a href="#5-Pro-Tips-for-Production" class="headerlink" title="5. Pro Tips for Production"></a>5. Pro Tips for Production</h2><ol>
+<li><p><strong>Connection Keepalives</strong><br>Add to ~&#x2F;.ssh&#x2F;config:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ServerAliveInterval 60</span><br><span class="line">TCPKeepAlive <span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Persistent Tmux Sessions</strong>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmux new -s dev_session  <span class="comment"># Create named session</span></span><br><span class="line">tmux attach -t dev_session  <span class="comment"># Reattach after disconnect</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>SSH Config Inheritance</strong><br>Use <code>Include</code> for modular configuration:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Include ~/.ssh/conf.d/*  <span class="comment"># Split config into multiple files</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Key-Takeaways"><a href="#Key-Takeaways" class="headerlink" title="Key Takeaways"></a>Key Takeaways</h2><ol>
+<li><strong>Tunnel Strategically</strong>: Choose -L&#x2F;-R&#x2F;-D based on network topology  </li>
+<li><strong>Automate Everything</strong>: Systemd services &gt; manual processes  </li>
+<li><strong>Terminal Resilience</strong>: TMUX sessions survive disconnections  </li>
+<li><strong>Config as Code</strong>: Maintain SSH connections through config files</li>
+</ol>
+<p>These techniques form the backbone of professional remote development workflows - master them to work seamlessly across distributed environments.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Coding/" rel="tag"># Coding</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/04/02/pytorch/" rel="prev" title="PyTorch - Deep Learning tricks in asset management">
+                  <i class="fa fa-angle-left"></i> PyTorch - Deep Learning tricks in asset management
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/04/02/behavioural-finance-factors/" rel="next" title="Quant Factors is about Behavioral Finance">
+                  Quant Factors is about Behavioral Finance <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Andy Cai</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/ajc327" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
