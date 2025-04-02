@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#020261"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#020261">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="A quantitative portfolio manager passionate about dissecting complexity at the intersection of finance, math, and technology. This site is my digital lab—a space where I document technical deep dives,">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Efficient Corner">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Efficient Corner">
+<meta property="og:description" content="A quantitative portfolio manager passionate about dissecting complexity at the intersection of finance, math, and technology. This site is my digital lab—a space where I document technical deep dives,">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Andy Cai">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Efficient Corner</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Efficient Corner</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Condensation of experiences</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Andy Cai</p>
+  <div class="site-description" itemprop="description">A quantitative portfolio manager passionate about dissecting complexity at the intersection of finance, math, and technology. This site is my digital lab—a space where I document technical deep dives, code snippets, and analytical explorations into algorithmic trading, risk modeling, data science, and the occasional offbeat problem that sparks my curiosity.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ajc327" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ajc327" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:andycai517@gmail.com" title="E-Mail → mailto:andycai517@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/31/gibbs-sampling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Efficient Corner">
+      <meta itemprop="description" content="A quantitative portfolio manager passionate about dissecting complexity at the intersection of finance, math, and technology. This site is my digital lab—a space where I document technical deep dives, code snippets, and analytical explorations into algorithmic trading, risk modeling, data science, and the occasional offbeat problem that sparks my curiosity.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Efficient Corner">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/10/31/gibbs-sampling/" class="post-title-link" itemprop="url">Gibbs Sampling</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-10-31 15:49:55" itemprop="dateCreated datePublished" datetime="2020-10-31T15:49:55+08:00">2020-10-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-04-02 16:22:59" itemprop="dateModified" datetime="2025-04-02T16:22:59+08:00">2025-04-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>In many inference tasks, it is necessary to integrate out variables. However, this may not always be possible as the integral may not be an analytically trackable function. Thankfully, we can leverage the law of large numbers to estimate these integrals from sampling. This means if we want to estimate $\phi &#x3D; \int \phi(x) p(x) dx$, we can simply sample from the joint distribution $p(x)$. We can take the empirical average $ \frac{1}{N} \sum_{i&#x3D;1}^N \phi(x_i)$, for large enough N this would converge to the actual mean. The problem is that the form of $ p(x) $ may be undesirable and sampling can be made difficult. One method to deal with this problem is using Gibbs sampling, which samples from the conditional distribution instead.</p>
+<h2 id="Gibbs-Sampling-method"><a href="#Gibbs-Sampling-method" class="headerlink" title="Gibbs Sampling method"></a>Gibbs Sampling method</h2><p>For each component i of x in turn, sample a new value from the conditional distribution of $x_i$ given all other $x_{j\neq i}$:  </p>
+<p>$$\begin{align}<br>x_i &amp; \sim p(x_i|x1,…,x_{i-1},x{i+1},…,x_D)<br>\end{align} $$</p>
+<p>This eventually generates dependent samples from the joint distribution $p(x)$.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>In this notebook I implement a Gibbs sampler, for both 2D and 3D distributions. This has taken inspiration from the materials in the Cambridge University Probablistic Machine Learning Course.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tools <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </span><br><span class="line"><span class="keyword">from</span> scipy.linalg <span class="keyword">import</span> sqrtm</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.animation <span class="keyword">as</span> animation</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
+
+<h2 id="Function-to-visualise-a-Guassian-with-a-given-variance"><a href="#Function-to-visualise-a-Guassian-with-a-given-variance" class="headerlink" title="Function to visualise a Guassian with a given variance"></a>Function to visualise a Guassian with a given variance</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_gaussian</span>(<span class="params">cov,mu,n,ax</span>):</span><br><span class="line">    mu = np.reshape(a=mu, newshape=(<span class="number">2</span>,<span class="number">1</span>))</span><br><span class="line">    theta = np.divide(<span class="built_in">range</span>(n),(n-<span class="number">1</span>))*<span class="number">2</span>*np.pi</span><br><span class="line">    epoints = np.matmul(sqrtm(cov),[np.cos(theta),np.sin(theta)])</span><br><span class="line">    epoints += np.matmul(mu, np.ones((<span class="number">1</span>,n)))</span><br><span class="line">    ax.plot(epoints[<span class="number">0</span>,:],epoints[<span class="number">1</span>,:])</span><br><span class="line">    ax.scatter(mu[<span class="number">0</span>,:],mu[<span class="number">1</span>,:],c =<span class="string">&#x27;r&#x27;</span>, s=<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">plot_gaussian([[<span class="number">1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">1</span>]],[<span class="number">1</span>,<span class="number">1</span>],<span class="number">60</span>, ax= ax)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/gibbs_1.png" title="Gaussian function"></p>
+<h2 id="The-Gibbs-sampler-to-sample-from-the-2D-Gaussian"><a href="#The-Gibbs-sampler-to-sample-from-the-2D-Gaussian" class="headerlink" title="The Gibbs sampler to sample from the 2D Gaussian"></a>The Gibbs sampler to sample from the 2D Gaussian</h2><p>This function first plots the joint Gaussian distribution on the random walk axes, using the previously defined function. This allows the target distribution to be visualised.</p>
+<p>The gibbs2 function then iterates throught the number of iterations require. For each iteration, it computes the conditional distribution of x given y, and vice versa. These give $p(x|y)$ and $p(y|x)$ to sample from. The conditionals are obtained by segmenting the covariance matrix in to sub matrices</p>
+<p>\begin{align}<br>p(x,y) &amp; &#x3D; \mathcal{N}\left( \begin{bmatrix} a \ b \end{bmatrix}, \begin{bmatrix} A &amp; B \ B^T &amp; C \end{bmatrix}\right) \<br>&amp; \to \<br>p(x|y) &amp; &#x3D; \mathcal{N}(a+BC^{-1}(y-b), A-BC^{-1}B^T)<br>\end{align}</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gibbs2</span>(<span class="params">N, ax1,ax2,cov=[[<span class="number">1</span>, <span class="number">0.5</span>],[<span class="number">0.5</span>,<span class="number">1</span>]], m =[<span class="number">0</span>,<span class="number">0</span>]</span>):</span><br><span class="line">    cov = np.array(cov)</span><br><span class="line">    ci = np.linalg.inv(cov)</span><br><span class="line">    <span class="comment"># init x at -2,2 </span></span><br><span class="line">    x = -<span class="number">2</span></span><br><span class="line">    y = <span class="number">2</span></span><br><span class="line">    plot_gaussian(cov=<span class="number">4</span>*cov, ax=ax1,mu=m,n=<span class="number">300</span>)</span><br><span class="line">    xx=[x]</span><br><span class="line">    yy=[y]</span><br><span class="line"></span><br><span class="line">    diff_list =[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">        xold = x</span><br><span class="line">        yold = y</span><br><span class="line">        x= -ci[<span class="number">0</span>,<span class="number">1</span>]*y/ci[<span class="number">0</span>,<span class="number">0</span>] + np.random.randn()/np.sqrt(ci[<span class="number">0</span>,<span class="number">0</span>])</span><br><span class="line">        <span class="comment">#print([xold,x])</span></span><br><span class="line">        ax1.plot([xold,x],[yold,y])</span><br><span class="line">        xold = x;</span><br><span class="line">        y = -ci[<span class="number">0</span>,<span class="number">1</span>]*x/ci[<span class="number">1</span>,<span class="number">1</span>]+ np.random.randn()/np.sqrt(ci[<span class="number">1</span>,<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(xx)&gt;<span class="number">1</span>:</span><br><span class="line">            emp_cov = np.cov(np.array(xx),np.array(yy))</span><br><span class="line">            diff = -<span class="built_in">abs</span>(cov-emp_cov).<span class="built_in">sum</span>()</span><br><span class="line">            diff_list.append(diff)</span><br><span class="line">            ax2.clear()</span><br><span class="line">            ax2.plot(diff_list)</span><br><span class="line">            ax2.set_title(<span class="string">&#x27;Convergence plot&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            ax2.set_xlabel(<span class="string">&#x27;iterations&#x27;</span>)</span><br><span class="line">            ax2.set_ylabel(<span class="string">&#x27;Empirical Covariance Matrix Error&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        ax1.plot([xold,x],[yold,y])</span><br><span class="line">        ax1.scatter(x,y, s= <span class="number">30</span>)</span><br><span class="line">        xx.append(x)</span><br><span class="line">        yy.append(y)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Uncomment this section and set %matplotlib to none to see live plot</span></span><br><span class="line">        <span class="comment">#plt.draw()</span></span><br><span class="line">        <span class="comment">#if i ==0:</span></span><br><span class="line">            <span class="comment">#plt.pause(0.1)</span></span><br><span class="line">        <span class="comment">#plt.pause(0.005)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">20</span>,<span class="number">10</span>))</span><br><span class="line">ax1= plt.subplot(<span class="number">211</span>)</span><br><span class="line">fig.suptitle(<span class="string">&#x27;Gibbs Sampling process on a 2D Gaussian distribution and Convergence plot&#x27;</span>,fontsize=<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">ax1.set_xlabel(<span class="string">&#x27;x1&#x27;</span>)</span><br><span class="line">ax1.set_ylabel(<span class="string">&#x27;x2&#x27;</span>)</span><br><span class="line">ax1.set_title(<span class="string">&#x27;Markov Chain Random Walk&#x27;</span>)</span><br><span class="line"></span><br><span class="line">ax2= plt.subplot(<span class="number">212</span>)</span><br><span class="line">ax2.set_title(<span class="string">&#x27;Convergence plot&#x27;</span>)</span><br><span class="line"></span><br><span class="line">ax2.set_xlabel(<span class="string">&#x27;iterations&#x27;</span>)</span><br><span class="line"><span class="comment">#plt.ion()</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#ani = animation.FuncAnimation(figs,animate, interval=1000)</span></span><br><span class="line"><span class="comment">#plt.show()</span></span><br><span class="line">gibbs2(<span class="number">100</span>,ax1,ax2)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/gibbs_2.png"></p>
+<h2 id="Function-to-sample-from-the-3-dimensional-Gaussian"><a href="#Function-to-sample-from-the-3-dimensional-Gaussian" class="headerlink" title="Function to sample from the 3 dimensional Gaussian"></a>Function to sample from the 3 dimensional Gaussian</h2><p>For the trivariate Guassian, the conditionals are more tricky to compute, as in the 2D case the conditional probability equations boil down to a set of scalars, where as in this case we see that matrices $A,B,C$ are matrices. We use a for loop to generate these matrices when we look at each of the variables [x1,x2,x3].</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gibbs3</span>(<span class="params">N, ax1,ax,cov=[[<span class="number">1</span>, <span class="number">0.5</span>,<span class="number">0.3</span>],[<span class="number">0.5</span>,<span class="number">1</span>,<span class="number">0.2</span>],[<span class="number">0.3</span>,<span class="number">0.2</span>,<span class="number">1</span>]], mu =[<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>]</span>):</span><br><span class="line">    cov = np.array(cov)</span><br><span class="line">    <span class="comment"># init x at -2,2 </span></span><br><span class="line">    x = np.array([-<span class="number">2.0</span>,<span class="number">2.0</span>,<span class="number">2.0</span>])</span><br><span class="line">    mu = np.array(mu)</span><br><span class="line">    xx=np.array([[],[],[]])</span><br><span class="line">    diff_list=[]</span><br><span class="line">    xold=[<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>]</span><br><span class="line">    xold[<span class="number">0</span>]= x[<span class="number">0</span>]</span><br><span class="line">    xold[<span class="number">1</span>]=x[<span class="number">1</span>]</span><br><span class="line">    xold[<span class="number">2</span>]=x[<span class="number">2</span>]</span><br><span class="line">    ite=[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">            ind_list = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">            ind_list.remove(j)</span><br><span class="line">            B=np.array([cov[j,ind_list[<span class="number">0</span>]],cov[j,ind_list[<span class="number">1</span>]]])</span><br><span class="line">            C=np.array([[cov[ind_list[<span class="number">0</span>],ind_list[<span class="number">0</span>]],cov[ind_list[<span class="number">0</span>],ind_list[<span class="number">1</span>]]],[cov[ind_list[<span class="number">1</span>],ind_list[<span class="number">0</span>]],cov[ind_list[<span class="number">1</span>],ind_list[<span class="number">1</span>]]]])</span><br><span class="line">            Ci = np.linalg.inv(C)</span><br><span class="line">            D = np.array(np.subtract([x[k] <span class="keyword">for</span> k <span class="keyword">in</span> ind_list],[mu[k] <span class="keyword">for</span> k <span class="keyword">in</span> ind_list]))</span><br><span class="line">            mean= mu[j]+np.matmul(np.matmul(B,Ci),D) </span><br><span class="line">            dev = np.sqrt(cov[j,j]-np.matmul(np.matmul(B,Ci),B.T))</span><br><span class="line">            x[j] =<span class="built_in">float</span>(mean)+np.random.randn()/<span class="built_in">float</span>(dev)</span><br><span class="line"></span><br><span class="line">            ax1.plot([xold[<span class="number">0</span>],x[<span class="number">0</span>]],[xold[<span class="number">1</span>],x[<span class="number">1</span>]],[xold[<span class="number">2</span>],x[<span class="number">2</span>]],alpha = <span class="number">0.3</span>)</span><br><span class="line">            ax1.scatter(*x,s=<span class="number">20</span>,alpha=<span class="number">0.4</span>)</span><br><span class="line">            xx=np.concatenate((xx,np.reshape(x.T,(<span class="number">3</span>,<span class="number">1</span>))), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            xold[j]=x[j]</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(xx[<span class="number">0</span>])&gt;<span class="number">3</span> <span class="keyword">and</span> <span class="built_in">len</span>(xx[<span class="number">0</span>])%<span class="number">8</span>==<span class="number">1</span>:</span><br><span class="line">                emp_cov = np.cov(np.array(xx))</span><br><span class="line">                diff = <span class="built_in">abs</span>(cov-emp_cov).<span class="built_in">sum</span>()</span><br><span class="line">                diff_list.append(diff)</span><br><span class="line">                ax.clear()</span><br><span class="line">                ax.plot(ite,diff_list)</span><br><span class="line">                ax.set_title(<span class="string">&#x27;Convergence Plot&#x27;</span>)</span><br><span class="line">                ax.set_ylabel(<span class="string">&#x27;Covariance matrix absolute error&#x27;</span>)</span><br><span class="line">                ax.set_xlabel(<span class="string">&#x27;Iteration&#x27;</span>)</span><br><span class="line">                ite.append(ite[-<span class="number">1</span>]+<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">14</span>,<span class="number">5</span>))</span><br><span class="line">ax1= plt.subplot(<span class="number">121</span>,projection=<span class="string">&#x27;3d&#x27;</span>)</span><br><span class="line">ax1.set_title(<span class="string">&#x27;Markov Chain Monte Carlo Random Walk on trivariate Gaussian&#x27;</span>)</span><br><span class="line">ax1.set_xlabel(<span class="string">&#x27;x1&#x27;</span>)</span><br><span class="line">ax1.set_ylabel(<span class="string">&#x27;x2&#x27;</span>)</span><br><span class="line">ax1.set_zlabel(<span class="string">&#x27;x3&#x27;</span>)</span><br><span class="line"></span><br><span class="line">ax=plt.subplot(<span class="number">122</span>)</span><br><span class="line">ax.set_title(<span class="string">&#x27;Convergence Plot&#x27;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&#x27;Covariance matrix absolute error&#x27;</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">&#x27;Iteration&#x27;</span>)</span><br><span class="line">plt.ion()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#ani = animation.FuncAnimation(figs,animate, interval=1000)</span></span><br><span class="line"><span class="comment">#plt.show()</span></span><br><span class="line">gibbs3(<span class="number">300</span>,ax1,ax)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/gibbs_3.png"></p>
+<h2 id="Interpretation-of-results-and-conclusion"><a href="#Interpretation-of-results-and-conclusion" class="headerlink" title="Interpretation of results and conclusion"></a>Interpretation of results and conclusion</h2><p>The gibbs sampler was able to successfully sample from the 2D and 3D distributions. It was observed that for the 2D case, the algorithm very rapidly converged in under 50 iterations. This means the variance of the sampled data was able to rapidly become similar to the expected distribution. However, for the 3D case, very slow convergence behaviour has been observed. The reason for this is currently unclear, and could be a consequence of how the convergence is defined.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/26/hacking-growth/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Efficient Corner">
+      <meta itemprop="description" content="A quantitative portfolio manager passionate about dissecting complexity at the intersection of finance, math, and technology. This site is my digital lab—a space where I document technical deep dives, code snippets, and analytical explorations into algorithmic trading, risk modeling, data science, and the occasional offbeat problem that sparks my curiosity.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Efficient Corner">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/08/26/hacking-growth/" class="post-title-link" itemprop="url">Hacking Growth Notes</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-08-26 15:49:44" itemprop="dateCreated datePublished" datetime="2020-08-26T15:49:44+08:00">2020-08-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-04-02 16:08:36" itemprop="dateModified" datetime="2025-04-02T16:08:36+08:00">2025-04-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>In the modern business we are increasingly discovering the inadequacy of traditional marketing methods. Even in technology companies, often we are still seeing marketing being separated from product development. This separation means a lack of interaction between the development team and the marketing team, thus a disconnection between the customers and the people developing their product. The book Hacking Growth analises the disadvantages of this, and introduces the Hacking Growth method, which is the act of combining marketing with product development, and applying agile software development process to improving the customer experience. This different way of marketing the product is more customer experience oriented, and aims to scientifically improve the product performance and thus achieve growth, through observing customers. This method has been used with proven potential to achieve explosive growth in some of the biggest companies today such as Facebook, Twitter, Dropbox, eBay and Paypal, just to name a few.</p>
+<h1 id="How-to-start-Hacking-Growth"><a href="#How-to-start-Hacking-Growth" class="headerlink" title="How to start Hacking Growth"></a>How to start Hacking Growth</h1><p>The process of hacking growth is applicable to every firm, as it is ultimately a change from developing a piece of technology and pursuading the public to like it, to tailoring the product to the needs of its customers, whether the group of customers are the intended target of the product or not. For any company to set up this strategy, the following few steps are needed:</p>
+<h1 id="Setting-up-a-growth-team"><a href="#Setting-up-a-growth-team" class="headerlink" title="Setting up a growth team"></a>Setting up a growth team</h1><p>The growth team should either be a separate team working with various products in the company (this is more common for smaller firms or start-ups) or integrated into a product team. The team can be permanent or temporary, meaning they could either be a long term part of the company or a specialist team set up for a particular project or even part of a project. The team should contain the following members:<br>1. Growth manager - The leader of the team, responsible for fascilitating the growth hacking process. The growth manager will determine the testing process and tempo, and make sure the team is achieving its objective. The manager will also lead the weekly meetings. No matter what background the manager came from, the role needs to also cover work of a product manager and a data scientist. The growth manager will also choose a monthly core performance index to pay attention to, and make sure the team measure the correct data to condense the results of the tests conducted.<br>2. Product manager - The product manager is responsible for helping the company to understand the needs of the customers.<br>3. Software engineers - Responsible for bringing about the changes and actuallly implementing the tests. However they are not only technical staff, who listens to the product team and write code. The software engineers are also an important part of the growth team because they have the innovative mindset and technical skills which can often bring very good growth ideas.<br>4. Marketing - The mix of engineers and marketing staff can bring about effective new ideas.<br>5. Data scientists - they will be responsible for collecting data, pre-processing and conducting the analysis which indicate changes or effects on the key performance index. This can’t be an intern who only knows how to work Google analytics, as these software solutions may only offer shallow insights and can’t work with data coming from different sources like customer stalking data.</p>
+<h1 id="Finding-the-“aha-moment”"><a href="#Finding-the-“aha-moment”" class="headerlink" title="Finding the “aha moment”"></a>Finding the “aha moment”</h1><h1 id="Finding-the-growth-lever-index"><a href="#Finding-the-growth-lever-index" class="headerlink" title="Finding the growth lever&#x2F;index"></a>Finding the growth lever&#x2F;index</h1><h1 id="Fast-paced-testing"><a href="#Fast-paced-testing" class="headerlink" title="Fast-paced testing"></a>Fast-paced testing</h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/19/mysql-basics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Efficient Corner">
+      <meta itemprop="description" content="A quantitative portfolio manager passionate about dissecting complexity at the intersection of finance, math, and technology. This site is my digital lab—a space where I document technical deep dives, code snippets, and analytical explorations into algorithmic trading, risk modeling, data science, and the occasional offbeat problem that sparks my curiosity.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Efficient Corner">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/08/19/mysql-basics/" class="post-title-link" itemprop="url">MySQL basics</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-08-19 15:49:28" itemprop="dateCreated datePublished" datetime="2020-08-19T15:49:28+08:00">2020-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-04-02 16:23:35" itemprop="dateModified" datetime="2025-04-02T16:23:35+08:00">2025-04-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>MySQL is an open-source relational database management system, it uses SQL, or Structured Query Language. It is very widely used by both individuals and organisations. A database is an object that stores a collection of data. This database object has APIs or methods of creating, accessing, managing, searching and replicating the data it holds.</p>
+<p>Relational database management systems allows for the storage and management of huge volume of data. Data in a relational database is stored into tables, and relationships can be established using primary keys or Foreign Keys.</p>
+<hr>
+<h1 id="Data-Types"><a href="#Data-Types" class="headerlink" title="Data Types"></a>Data Types</h1><p>The data stored in the relational database has different types, and these must be defined when we create a new table or add columns. These data types can be divided into three categories: Numeric data, String data and Date and time data types. A complete collection of these can be found on <a target="_blank" rel="noopener" href="http://mysqldatatypes.com/">mysqldatatypes</a> website.</p>
+<hr>
+<h1 id="Commands"><a href="#Commands" class="headerlink" title="Commands"></a>Commands</h1><p>Once we are in the Mariadb console, we can use SQL commands to achieve database management tasks.</p>
+<p>In SQL, the convention is to write the commands in all uppercase. This is to distinguish the commands from the others.</p>
+<p>First, we want to create a database, create a user and give the user previleges to use the database.</p>
+<p>Now, we can use the database by calling:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USE mydb</span><br></pre></td></tr></table></figure>
+
+<p>A database is used to store a number of tables, which are basically like a sheet in Excel. To create a table, we use:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> students (</span><br><span class="line">	student_id <span class="type">INT</span> <span class="keyword">PRIMARY KEY</span>,</span><br><span class="line">	name <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">	major <span class="type">VARCHAR</span>(<span class="number">20</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>Note that we have defined the student_id column as integers, and we have indicated that it is the <code>primary key</code>. Also, we need to define how many string characters we would like to assign to each entry in the column. For names, 20 should be sufficient.</p>
+<p>We can now see the table when use use:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DESCRIBE</span> students;</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/mysql_des.png"></p>
+<p>To delete a table, use:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> mytable; </span><br></pre></td></tr></table></figure>
+
+
+
+<p>To add a gpa column to the students table, use:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER TABLE</span> students <span class="keyword">ADD</span> gpa <span class="type">DECIMAL</span>(<span class="number">3</span>,<span class="number">2</span>); </span><br></pre></td></tr></table></figure>
+
+
+<p>To remove the gpa column from the table, use:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER TABLE</span> students <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> gpa;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Now, we have the framework of the table set up, however there is no data inside of the table, so we will need to populate it.</p>
+<p>To enter a row into the table, use the following:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> students <span class="keyword">VALUES</span>(<span class="number">1</span>,<span class="string">&#x27;Andy&#x27;</span>, <span class="string">&#x27;Engineering&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>To see the table after this, we can use:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> student;</span><br></pre></td></tr></table></figure>
+
+<p>This will show the following:</p>
+<p><img src="/images/mysql_select.png"></p>
+<p>If we are missing some values but would like to enter data for the other columns, we can use the following command:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> students(student_id, name, major) <span class="keyword">VALUES</span>(<span class="number">3</span>,<span class="string">&#x27;Mike&#x27;</span>,<span class="string">&#x27;Engineering&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>The missing values will be replaced with a ‘Null’ by the database.</p>
+<p><img src="/images/mysql_nogpa.png"></p>
+<p>We can also specify some attributes or constraints for the columns. For example, we can use the keywords <code>UNIQUE</code>, and <code>NOT NULL</code> to ensure the name column must not be null and that each row in the table must have a unique major. Using the keyword <code>DEFAULT</code>, we defaulted the gpa to 0 if not provided with one. the <code>AUTO_INCREMENT</code> keyword automatically increments the integer value of student_id.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> students (</span><br><span class="line">	student_id <span class="type">INT</span> AUTO_INCREMENT,</span><br><span class="line">	name <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">	major <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">UNIQUE</span>,</span><br><span class="line">	gpa <span class="type">DECIMAL</span>(<span class="number">3</span>,<span class="number">2</span>) <span class="keyword">DEFAULT</span> <span class="string">&#x27;0.00&#x27;</span></span><br><span class="line">	<span class="keyword">PRIMARY KEY</span>(student_id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+<p>To change data in the table, we have a few more commands.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> students </span><br><span class="line"><span class="keyword">SET</span> major <span class="operator">=</span> <span class="string">&#x27;Engi&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> major <span class="operator">=</span> <span class="string">&#x27;Engineering&#x27;</span> <span class="keyword">OR</span> major <span class="operator">=</span> <span class="string">&#x27;engineering&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+
+<p>The above code changes the major colume to ‘Engi’ if it is currently ‘engineering’. Note it is possible to use boolean logic in this operation.</p>
+<p>To delete a datapoint from the table, use:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> students</span><br><span class="line"><span class="keyword">WHERE</span> name <span class="operator">=</span> <span class="string">&#x27;Tom&#x27;</span> <span class="keyword">AND</span> gpa <span class="operator">=</span> <span class="number">0.00</span>; </span><br></pre></td></tr></table></figure>
+
+<h1 id="Queries"><a href="#Queries" class="headerlink" title="Queries"></a>Queries</h1><p>Queries are pieces of commands to grab specific data we would like to access according to certain conditions.</p>
+<p>We have already used the command <code>SELECT * FROM students;</code>, which just selects everything from the table. We can be more specific by using the following syntax:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> students.student_id <span class="keyword">AS</span> ID, sduents.gpa <span class="keyword">AS</span> MARK</span><br><span class="line"><span class="keyword">FROM</span> students</span><br><span class="line"><span class="keyword">WHERE</span> major <span class="keyword">IN</span> (<span class="string">&#x27;Engineering&#x27;</span>,<span class="string">&#x27;Maths&#x27;</span>) <span class="keyword">OR</span> name <span class="operator">=</span> <span class="string">&#x27;Andy&#x27;</span></span><br><span class="line"><span class="comment">-- note we can also use &lt;, &gt;, &lt;=, &gt;=, &lt;&gt;, IN as operators. </span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> gpa <span class="keyword">ASC</span>, student_id</span><br><span class="line">LIMIT <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+<p>In the above code we isolate the two columns we want, and filter using major and andy, then we order the results firstly using gpa in ascending order and then using student_id. We show the first 5 data points using the <code>LIMIT</code> keyword. The use of <code>AS</code> renames the columns when we show them. As the schema get more and more complex, the ways of querying them and obtain the data we want becomes more complicated.</p>
+<p>To find out all the different values in a column, use:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> major </span><br><span class="line"><span class="keyword">FROM</span> students;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="SQL-functions"><a href="#SQL-functions" class="headerlink" title="SQL functions"></a>SQL functions</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--SELECT COUNT(emp_id)  --this counts the number of data points satisfying the condition</span></span><br><span class="line"><span class="comment">--SELECT AVG(salary) -- average of salaries</span></span><br><span class="line"><span class="comment">--SELECT SUM(slarary) -- sum of salaries</span></span><br><span class="line"><span class="keyword">FROM</span> employee </span><br><span class="line"><span class="keyword">WHERE</span> sex <span class="operator">=</span> <span class="string">&#x27;F&#x27;</span> <span class="keyword">AND</span> birth_data <span class="operator">&gt;</span> <span class="string">&#x27;1970-01-01&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>To count things then group by category:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(sex), sex </span><br><span class="line"><span class="keyword">From</span> employee</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> sex;</span><br></pre></td></tr></table></figure>
+
+<p>This is called aggregation in SQL.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/15/hexo-deploy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Efficient Corner">
+      <meta itemprop="description" content="A quantitative portfolio manager passionate about dissecting complexity at the intersection of finance, math, and technology. This site is my digital lab—a space where I document technical deep dives, code snippets, and analytical explorations into algorithmic trading, risk modeling, data science, and the occasional offbeat problem that sparks my curiosity.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Efficient Corner">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/08/15/hexo-deploy/" class="post-title-link" itemprop="url">Deploying the Hexo website to Github</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-08-15 15:49:15" itemprop="dateCreated datePublished" datetime="2020-08-15T15:49:15+08:00">2020-08-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-04-02 16:07:10" itemprop="dateModified" datetime="2025-04-02T16:07:10+08:00">2025-04-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Creating-the-user-repo-on-Github"><a href="#Creating-the-user-repo-on-Github" class="headerlink" title="Creating the user repo on Github"></a>Creating the user repo on Github</h1><p>Assuming we already have a Github account, we need to first log in to our personal page, then create a personal repository. Note that the name of this repository needs to strictly follow the format <code>githubID.github.io</code>, or else our hexo server will fail to deploy to Github.</p>
+<h1 id="Generating-SSH-key-and-providing-it-to-Github"><a href="#Generating-SSH-key-and-providing-it-to-Github" class="headerlink" title="Generating SSH key and providing it to Github"></a>Generating SSH key and providing it to Github</h1><p>Now we need to return to the git bash on the web server, and configure git so that it has our credentials:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;myusername&quot;</span><br><span class="line">git config --global user.email &quot;youremail&quot; </span><br></pre></td></tr></table></figure>
+
+<p>Next, we need to generate a private public key pair so that github can use the public key to communicate with our machine using ssh.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail&quot;</span><br></pre></td></tr></table></figure>
+
+
+<p>The code above will create a .ssh folder if it does not exist, in the root folder. In this folder there will be a <code>id_rsa.pub</code> file, which is the public key. We will upload this to Github.</p>
+<h1 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h1><p>Now, we can actually connect the hexo server and the Github repo. This step will upload the files generated by hexo into the GitHub repo, so we can access the website publicly through the GitHub server. To do this, we first add the relevant deployment information in the <code>_config.yml</code> page. We can edit it using <code>sudo geany _config.yml</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy: </span><br><span class="line">	type:git </span><br><span class="line">	repo: https://github.com/id/id.github.io.git</span><br><span class="line">	branch: master </span><br></pre></td></tr></table></figure>
+
+<p>Now we need to install the deployment software as well, using <code>npm install hexo-deployer-git --save</code>.</p>
+<p>Finally, we can use the following to clean the folder, generate the static articles, then deploy the website.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo generate </span><br><span class="line">hexo deploy </span><br></pre></td></tr></table></figure>
+
+
+<p>If we now visit <code>http://id.github.io</code> we will be able to see the website. However, this is a rather random address to remember, so we can give the website a personalised address. We can do this by buying a domain name such as <code>andycai.top</code> from vendors such as godaddy or alicloud. A more common suffix like .com may be more expensive. After buying the domain name, we can set up an CNAME (canonical Name record) for the domain, essentially making it an alias of our default <code>id.github.io</code> domain.</p>
+<p>Now, we can access our website from the new domain name <code>andycai.top</code>.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/22/hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Efficient Corner">
+      <meta itemprop="description" content="A quantitative portfolio manager passionate about dissecting complexity at the intersection of finance, math, and technology. This site is my digital lab—a space where I document technical deep dives, code snippets, and analytical explorations into algorithmic trading, risk modeling, data science, and the occasional offbeat problem that sparks my curiosity.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Efficient Corner">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/07/22/hexo/" class="post-title-link" itemprop="url">Setting up a blogging website using Hexo</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-07-22 15:49:04" itemprop="dateCreated datePublished" datetime="2020-07-22T15:49:04+08:00">2020-07-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-04-02 16:06:25" itemprop="dateModified" datetime="2025-04-02T16:06:25+08:00">2025-04-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><p>Hexo is a static blog framework built on Node.js. It has few dependencies and is very easy to use. Using it we can create a static website and deploy it to hosting platforms such as github, or in this case, we deploy it using Peanut Hull DDNS provider.</p>
+<h1 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h1><p>We use git for version control and deplopyment to github. To install this on the server, run the following:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install git</span><br></pre></td></tr></table></figure>
+
+
+<p>and we can use <code>git --version</code> to check the version of git and whether it has been installed correctly.</p>
+<h1 id="Installing-Node-js"><a href="#Installing-Node-js" class="headerlink" title="Installing Node.js"></a>Installing Node.js</h1><blockquote>
+<p>Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript outside a web browser. Node.js lets developers use JavaScript to write command line tools and for server-side scripting to produce dynamic web page content…</p>
+</blockquote>
+<p>To install node.js on linux, we use</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install nodejs </span><br><span class="line"><span class="built_in">sudo</span> apt-get install npm</span><br></pre></td></tr></table></figure>
+
+
+<p>we can check the versions of them using</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v </span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Installing-hexo"><a href="#Installing-hexo" class="headerlink" title="Installing hexo"></a>Installing hexo</h1><p>After we have installed git and nodejs, we can finally install hexo. Simply use</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli </span><br></pre></td></tr></table></figure>
+
+<p>to install the hexo client.</p>
+<h1 id="Creating-the-blog"><a href="#Creating-the-blog" class="headerlink" title="Creating the blog"></a>Creating the blog</h1><p>Now, all the installations are complete, we can again check version using <code>hexo -v</code> and start initialising a blog.</p>
+<p>We can <code>mkdir blog</code> somewhere convenient and use the following to create the blog:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init myblog </span><br></pre></td></tr></table></figure>
+
+<p>Which creates another folder myblog inside blog and initialises a new blog in myblog.</p>
+<p>To generate the static web pages, use <code>hexo g</code> or <code>hexo generate</code>.</p>
+<p>Now, we can start the server using <code>hexo s</code> or <code>hexo server</code>.</p>
+<p><img src="/images/hexo_hexog.png"></p>
+<p>The <code>hexo init</code> has created a website skeleton for us using the default landscape theme. We can now access the website using any local machine by accessing <code>http://xxx.xxx.x.xxx:4000</code></p>
+<p><img src="/images/hexo_blog.png" title="The default website"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/21/lamp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Efficient Corner">
+      <meta itemprop="description" content="A quantitative portfolio manager passionate about dissecting complexity at the intersection of finance, math, and technology. This site is my digital lab—a space where I document technical deep dives, code snippets, and analytical explorations into algorithmic trading, risk modeling, data science, and the occasional offbeat problem that sparks my curiosity.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Efficient Corner">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/07/21/lamp/" class="post-title-link" itemprop="url">Setting up a LAMP stack on the Raspi</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-07-21 15:01:43" itemprop="dateCreated datePublished" datetime="2020-07-21T15:01:43+08:00">2020-07-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-04-02 16:03:29" itemprop="dateModified" datetime="2025-04-02T16:03:29+08:00">2025-04-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>LAMP is Linux + Apache + MySQL + php, is an open source WEB server solution. Using this method, we can set up a server on port 80 of our local machine, and we can then use either DDNS internal network penetration or Github to deploy the website to the public network.</p>
+<h1 id="Installation-of-packages"><a href="#Installation-of-packages" class="headerlink" title="Installation of packages"></a>Installation of packages</h1><p>As per usual, we first update the source list using <code>sudo apt-get update</code>, and use the following to install apache and mySQL.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install apache2 </span><br><span class="line">sudop apt-get install mysql-server</span><br></pre></td></tr></table></figure>
+
+
+<p>Here, we encountered a problem here where we got the following message:</p>
+<!-- <img src="\source\_posts\lamp\nosql.png" title="A regular image" width="40px" height="40px"> -->
+<!-- ![Alt Text](Post-Asset-Folder/image-name.png) -->
+<p><img src="/images/nosql.png"></p>
+<!-- ![](lamp/nosql.png) -->
+
+<p>This probably means that for the Raspi we need to download something else called <code>mariadb-server</code> instead. We use <code>sudo apt-get install mariadb-server mariadb-client</code> and installed the mariadb-server with few problems.</p>
+<p>Next, we install php using <code>sudo apt-get install php</code>.</p>
+<p>We need to set up sql now with</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> mysql -u root -p </span><br></pre></td></tr></table></figure>
+
+<p>This enters into the mariadb terminal. We can enter database commands in this shell.</p>
+<p>We now use the following to create the database and add a user for the database:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE \`mydb\`;</span><br><span class="line">CREATE USER <span class="string">&#x27;myuser&#x27;</span> IDENTIFIED BY <span class="string">&#x27;mypassword&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+
+<p>We need to allow acess from localhost, which is the most secure and common configuration for a web application. To do this:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT USAGE ON *.* TO <span class="string">&#x27;myuser&#x27;</span>@localhost IDENTIFIED BY <span class="string">&#x27;mypassword&#x27;</span> </span><br><span class="line">GRANT ALL privileges ON \`mydb\`.* TO <span class="string">&#x27;myuser&#x27;</span>@localhost;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>We now apply the changes and view the results of the permission settings by using:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">SHOW GRANTS FOR <span class="string">&#x27;myuser&#x27;</span>@localhost;</span><br></pre></td></tr></table></figure>
+
+<p>As we proceeded through these steps, we encountered syntax problems many times, this is due to the special character we need to use when we call databases.</p>
+<p>We can delete users and databases using:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP USER myuser@localhost;</span><br><span class="line">DROP DATABASE mydb; </span><br></pre></td></tr></table></figure>
+
+
+<p>We now install <code>php-mysql</code> using <code>sudo apt-get install php-mysql</code>, and finally we can use <code>sudo apt-get install phpmyadmin</code> to install phpmyadmin. When prompted, we choose <code>apache2</code> to use apache2 as the web server we want.</p>
+<p>Note: We must install phpmyadmin last!</p>
+<p>After installation, we follow through the set up process in the terminal window. We will be asked to create some passwords for mysql, note that this is a different set of password for th mysql only.</p>
+<p>Now, we have a <code>/var/www/html</code> folder set up. We need to give ourselves permissions for this folder as well as the <code>/etc/php/7.3</code> folder. In the <code>7.3</code> folder, we can change some properties of our server such as max file size and cache storage times.</p>
+<p>Next, we append <code>Include /etc/phpmyadmin/apache.conf</code> into the <code>/etc/apache2/apache2.conf</code> file to link phpmyadmin with the apache2. Restart the apache2 server using:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> service apache2 restart</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Now, we can open up a web browser and navigate to <code>localhost/phpMyAdmin</code> and log in with our credentials.</p>
+<p><img src="/images/myadmin.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/20/raspi4-setup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Andy Cai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Efficient Corner">
+      <meta itemprop="description" content="A quantitative portfolio manager passionate about dissecting complexity at the intersection of finance, math, and technology. This site is my digital lab—a space where I document technical deep dives, code snippets, and analytical explorations into algorithmic trading, risk modeling, data science, and the occasional offbeat problem that sparks my curiosity.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Efficient Corner">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/07/20/raspi4-setup/" class="post-title-link" itemprop="url">Setting up a new Raspberry Pi 4</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-07-20 15:10:03" itemprop="dateCreated datePublished" datetime="2020-07-20T15:10:03+08:00">2020-07-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-04-02 16:03:06" itemprop="dateModified" datetime="2025-04-02T16:03:06+08:00">2025-04-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Installing-the-Raspberry-Pi-Os"><a href="#Installing-the-Raspberry-Pi-Os" class="headerlink" title="Installing the Raspberry Pi Os"></a>Installing the Raspberry Pi Os</h1><p>The new Raspberry Pi out of the box is just a piece of hardware with no software on it, so we need to first set up an operating system to start using it. Here we chose the recommended Raspberry Pi OS (previously called Raspbian). We can of course install other operating systems like CentOs, Ubuntu etc.</p>
+<p><img src="/images/osdown.png"></p>
+<p>We can install the Rpi OS in a couple of ways, either using the rpi-imagers available to different operating systems, or we can manually image the OS onto the SD card. In order to do this, we first downloaded a windows disk imager software and using it, successfully imaged the OS onto the card. Note there are numerous choices for imaging software out there and they are pretty much all free.</p>
+<p>We can now remove the SD card and insert it into our Rpi.</p>
+<hr>
+<h1 id="Setting-up-SSH-for-remote-access"><a href="#Setting-up-SSH-for-remote-access" class="headerlink" title="Setting up SSH for remote access"></a>Setting up SSH for remote access</h1><p>Now in order to set up the system, we can either do it headlessly through ssh (Secure Shell) or use a monitor and keyboard. As I have already set up a Rpi 3B before using the keyboard, and also my monitor had not arrived at the time of my explorations, I set it up headlessly and this is the method we will document here.</p>
+<p>In order to set up SSH in the first place we must connect the RPi to the local network, at which point we can then use another device on the same network to SSH into our Pi. We can do this with an ethernet cable, but as I don’t have one handy, we will set up the wireless netowrk instead</p>
+<h1 id="Setting-up-wireless-networking-and-enabling-SSH"><a href="#Setting-up-wireless-networking-and-enabling-SSH" class="headerlink" title="Setting up wireless networking and enabling SSH"></a>Setting up wireless networking and enabling SSH</h1><p>we need to tell the Raspberry Pi to connect to wifi as well as to give it the credentials for the home wifi, so that it will automatically connect to it upon startup. This is done by defining a <code>wpa_supplicant.conf</code> file in the boot folder, to store the network credentials. When booted, it will copy the file to the correct location aned use it to set up wireless networking.</p>
+<p>Here is an example for the <code>wpa_supplicant.conf</code> file:</p>
+<p>Also, we create a <code>ssh</code> file and also place this into the root folder, so that it will turn ssh on by default. In order to use ssh (or any kind of remote access) we must know the IP address of the Rpi within our local network. This can be found in a few ways:</p>
+<ol>
+<li>Use <code>arp -a</code> in Linux terminal. However, this did not work. The command managed to find the macbook pro and an Ubuntu vm as well as the windows computer but failed to find the raspi. Also, the naming seemed to be confusing and it was difficult to tell which one is the one we look for anyway.</li>
+<li>Use <code>sudo apt-get install nmap</code> then <code>nmap -sn 192.168.5.0/24</code> to ping all the addresses from <code>192.168.5.0</code> to <code>192.168.5.255</code> and return all the ones that connected. This also didn’t show the Raspi.</li>
+<li>Download an IP scanner tool. In this case we downloaded Advanced IP Scanner for Windows 10 and was able to successfully find the Raspi.</li>
+</ol>
+<p><img src="/images/advanced_ip_scanner.png" title="The search results from the Advanced IP Scanner"></p>
+<p>Interestingly, after using the advanced IP Scanner to locate the IP address of raspi, the first two methods now also can find the raspi. Note the advanced ip scanner was able to find a lot more other devices on the network such as mobile phones.</p>
+<p>If we are setting up the raspi using a monitor and keyboard, we can enable SSH server from the terminal using <code>sudo raspi-config</code>, however we have already enabled SSH when we included the ssh file in the boot folder. Now it is possible to use an SSH client on other devices to access the raspi using <code>ssh pi@192.168.x.x</code>. As scp (secure copy) is also built on ssh, it is now possible to use scp to send files to the raspi. The command is <code>scp myfile.txt pi@192.168.x.x:~/Desktop</code>, which puts the file on the desktop.</p>
+<hr>
+<p>To work on the Raspi desktop remotely, we can use VNC. This is a graphical desktop sharing system which allows another device on the same network running a VNC client to access the rapsi, which is running a vnc server. The default included VNC server in the Raspi is the RealVNC server, which we can enable and use.</p>
+<p><img src="/images/vnc.png" title="A VNC client accessing the Raspi Desktop."></p>
+<p>Install the vnc server using</p>
+<p>Again, we enable the VNC in a headless manner, using</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> raspi-config </span><br></pre></td></tr></table></figure>
+
+
+<p>Same as before, the VNC service can also be enabled using the Raspi graphical configuration tool, which can be accessed using <code>sudo raspi-config</code>.</p>
+<p><img src="/images/raspi-config.png" title="The Raspi graphical configuration tool"></p>
+<p>Once we enable the VNC server, we will be able to choose which port to run it on. The RealVPN service includes cloud connection and direct connection, and these are authenticated using RealVNC account credentials and generic VNC password respectively.</p>
+<p>We can now run <code>vncserver</code> to get the server running.</p>
+<hr>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>In this post we set up a Raspberry Pi 4 from scratch in headless mode.</p>
+<ul>
+<li>We installed the Raspberry Pi OS on the SD card manually.</li>
+<li>We enabled ssh through placing the ssh file in the boot folder.</li>
+<li>We provided the Raspberry Pi with wireless connection credentials through placing a <code>wpa_supplicant.conf</code> file in the boot folder and enter the wireless name and password in it.</li>
+<li>We configured the Raspi to have VNC enabled so that we can access the desktop remotely.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Andy Cai</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/ajc327" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
