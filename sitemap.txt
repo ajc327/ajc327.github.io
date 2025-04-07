@@ -1,3 +1,5 @@
+http://example.com/Photos/index.html
+http://example.com/about/index.html
 http://example.com/2025/04/04/time-moe-invest/
 http://example.com/2025/03/10/llm-invest/
 http://example.com/2024/01/02/behavioural-finance-factors/
@@ -11,13 +13,11 @@ http://example.com/2023/04/12/numba/
 http://example.com/2023/07/08/pyspark/
 http://example.com/2023/06/02/pytorch/
 http://example.com/2022/08/25/linux-remote/
-http://example.com/Photos/index.html
 http://example.com/2020/07/20/raspi4-setup/
 http://example.com/2020/07/22/hexo/
 http://example.com/2020/08/15/hexo-deploy/
 http://example.com/tags/index.html
 http://example.com/categories/index.html
-http://example.com/about/index.html
 http://example.com/
 http://example.com/tags/Reading/
 http://example.com/tags/Coding/
