@@ -19,12 +19,12 @@ http://example.com/2020/08/15/hexo-deploy/
 http://example.com/tags/index.html
 http://example.com/categories/index.html
 http://example.com/
+http://example.com/tags/Finance/
+http://example.com/tags/Quant/
+http://example.com/tags/Data-science/
 http://example.com/tags/Reading/
 http://example.com/tags/Coding/
 http://example.com/tags/Client-Service/
-http://example.com/tags/Data-science/
-http://example.com/tags/Finance/
-http://example.com/tags/Quant/
 http://example.com/tags/Machine-Learning/
 http://example.com/tags/Data-Science/
 http://example.com/tags/LLM/
