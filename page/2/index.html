@@ -591,9 +591,9 @@
 <p>Which creates another folder myblog inside blog and initialises a new blog in myblog.</p>
 <p>To generate the static web pages, use <code>hexo g</code> or <code>hexo generate</code>.</p>
 <p>Now, we can start the server using <code>hexo s</code> or <code>hexo server</code>.</p>
-<p><img src="/images/hexo_hexog.png"></p>
+<p><img data-src="/images/hexo_hexog.png"></p>
 <p>The <code>hexo init</code> has created a website skeleton for us using the default landscape theme. We can now access the website using any local machine by accessing <code>http://xxx.xxx.x.xxx:4000</code></p>
-<p><img src="/images/hexo_blog.png" title="The default website"></p>
+<p><img data-src="/images/hexo_blog.png" title="The default website"></p>
 
       
     </div>
@@ -788,7 +788,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="Installing-the-Raspberry-Pi-Os"><a href="#Installing-the-Raspberry-Pi-Os" class="headerlink" title="Installing the Raspberry Pi Os"></a>Installing the Raspberry Pi Os</h1><p>The new Raspberry Pi out of the box is just a piece of hardware with no software on it, so we need to first set up an operating system to start using it. Here we chose the recommended Raspberry Pi OS (previously called Raspbian). We can of course install other operating systems like CentOs, Ubuntu etc.</p>
-<p><img src="/images/osdown.png"></p>
+<p><img data-src="/images/osdown.png"></p>
 <p>We can install the Rpi OS in a couple of ways, either using the rpi-imagers available to different operating systems, or we can manually image the OS onto the SD card. In order to do this, we first downloaded a windows disk imager software and using it, successfully imaged the OS onto the card. Note there are numerous choices for imaging software out there and they are pretty much all free.</p>
 <p>We can now remove the SD card and insert it into our Rpi.</p>
 <hr>
@@ -802,19 +802,19 @@
 <li>Use <code>sudo apt-get install nmap</code> then <code>nmap -sn 192.168.5.0/24</code> to ping all the addresses from <code>192.168.5.0</code> to <code>192.168.5.255</code> and return all the ones that connected. This also didn’t show the Raspi.</li>
 <li>Download an IP scanner tool. In this case we downloaded Advanced IP Scanner for Windows 10 and was able to successfully find the Raspi.</li>
 </ol>
-<p><img src="/images/advanced_ip_scanner.png" title="The search results from the Advanced IP Scanner"></p>
+<p><img data-src="/images/advanced_ip_scanner.png" title="The search results from the Advanced IP Scanner"></p>
 <p>Interestingly, after using the advanced IP Scanner to locate the IP address of raspi, the first two methods now also can find the raspi. Note the advanced ip scanner was able to find a lot more other devices on the network such as mobile phones.</p>
 <p>If we are setting up the raspi using a monitor and keyboard, we can enable SSH server from the terminal using <code>sudo raspi-config</code>, however we have already enabled SSH when we included the ssh file in the boot folder. Now it is possible to use an SSH client on other devices to access the raspi using <code>ssh pi@192.168.x.x</code>. As scp (secure copy) is also built on ssh, it is now possible to use scp to send files to the raspi. The command is <code>scp myfile.txt pi@192.168.x.x:~/Desktop</code>, which puts the file on the desktop.</p>
 <hr>
 <p>To work on the Raspi desktop remotely, we can use VNC. This is a graphical desktop sharing system which allows another device on the same network running a VNC client to access the rapsi, which is running a vnc server. The default included VNC server in the Raspi is the RealVNC server, which we can enable and use.</p>
-<p><img src="/images/vnc.png" title="A VNC client accessing the Raspi Desktop."></p>
+<p><img data-src="/images/vnc.png" title="A VNC client accessing the Raspi Desktop."></p>
 <p>Install the vnc server using</p>
 <p>Again, we enable the VNC in a headless manner, using</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> raspi-config </span><br></pre></td></tr></table></figure>
 
 
 <p>Same as before, the VNC service can also be enabled using the Raspi graphical configuration tool, which can be accessed using <code>sudo raspi-config</code>.</p>
-<p><img src="/images/raspi-config.png" title="The Raspi graphical configuration tool"></p>
+<p><img data-src="/images/raspi-config.png" title="The Raspi graphical configuration tool"></p>
 <p>Once we enable the VNC server, we will be able to choose which port to run it on. The RealVPN service includes cloud connection and direct connection, and these are authenticated using RealVNC account credentials and generic VNC password respectively.</p>
 <p>We can now run <code>vncserver</code> to get the server running.</p>
 <hr>
